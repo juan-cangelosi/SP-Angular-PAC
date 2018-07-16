@@ -1,4 +1,6 @@
-<button mat-fab color="primary" class="floating-add-button" (click)="goToNewRequest()">+</button>
+<button mat-fab color="primary" class="floating-add-button" (click)="goToNewRequest()">
+  <mat-icon>add</mat-icon>
+</button>
 
 <mat-paginator [length]="resultsLength" [pageSize]="20"></mat-paginator>
 <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">

@@ -10,10 +10,13 @@ export class HeaderComponent implements OnInit {
 
   public currentSite = 'Home';
 
+  public isAdmin: boolean;
+
   constructor(public router: UIRouter) {
   }
 
   ngOnInit() {
+    this.isAdmin = true;
   }
 
   public viewUserRequests() {

@@ -6,7 +6,9 @@
   <span class="example-fill-remaining-space"></span>
   <div class="button-row">
     <button mat-button (click)="viewUserRequests()">My Requests</button> 
-    <button mat-button (click)="viewAdminRequests()">User Requests</button>
-    <button mat-button (click)="viewCalendar()">Calendar</button>
+    <button *ngIf="isAdmin" mat-button (click)="viewAdminRequests()">User Requests</button>
+    <button mat-icon-button (click)="viewCalendar()">
+        <mat-icon  matBadge="22" matBadgeColor="warn">event</mat-icon>
+      </button>
   </div>
 </mat-toolbar>

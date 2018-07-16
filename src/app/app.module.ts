@@ -22,12 +22,14 @@ import {
   MatCardModule,
   MatTableModule,
   MatSortModule,
-  MatPaginatorModule
+  MatPaginatorModule,
+  MatBadgeModule
 } from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import { HeaderComponent } from './header/header.component';
 import { FormsModule } from '@angular/forms';
+import { RequestViewComponent } from './request-view/request-view.component';
 
 const userViewState = { name: 'user-view', component: UserViewComponent };
 const adminViewState = { name: 'admin-view', component: AdminViewComponent };
@@ -45,7 +47,8 @@ const viewRequestState = { name: 'view-request', component: RequestsComponent };
     RequestsComponent,
     CalendarComponent,
     NewRequestComponent,
-    HeaderComponent
+    HeaderComponent,
+    RequestViewComponent
   ],
   imports: [
     BrowserModule,
@@ -75,7 +78,7 @@ const viewRequestState = { name: 'view-request', component: RequestsComponent };
     MatTableModule,
     MatSortModule,
     MatPaginatorModule,
-
+    MatBadgeModule
   ],
   providers: [],
   bootstrap: [AppComponent]
