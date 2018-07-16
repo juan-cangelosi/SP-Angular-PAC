@@ -1,0 +1,48 @@
+<mat-toolbar color="primary">
+  <div class="calendar-header">
+    <mat-form-field>
+      <mat-select placeholder="Month" [(ngModel)]="selectedMonth">
+        <mat-option *ngFor="let month of months" [value]="month">
+          {{month}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-select placeholder="Year" [(ngModel)]="selectedYear">
+        <mat-option *ngFor="let year of years" [value]="year">
+          {{year}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+</mat-toolbar>
+<table class="calendar-table">  <!--  class="mat-calendar-table" -->
+  <thead> <!--   class="mat-calendar-table-header" -->
+    <th *ngFor="let weekDay of weekDays">
+      {{weekDay}}
+      <mat-divider></mat-divider>
+    </th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let daysRow of monthDays">
+      <td *ngFor="let dayCol of daysRow">
+          <!-- <button mat-button>{{dayCol}}</button> -->
+        <mat-card class="example-card">
+          <mat-card-header>
+            <mat-card-title>{{dayCol}}</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <p>
+              Notificaciones!
+            </p>
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-button>Ver</button>
+            <button mat-button>Modificar</button>
+          </mat-card-actions>
+        </mat-card>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<mat-calendar></mat-calendar>
