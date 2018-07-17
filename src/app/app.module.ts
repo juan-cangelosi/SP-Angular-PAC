@@ -23,12 +23,15 @@ import {
   MatTableModule,
   MatSortModule,
   MatPaginatorModule,
-  MatBadgeModule
+  MatBadgeModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatAutocompleteModule
 } from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import { HeaderComponent } from './header/header.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RequestViewComponent } from './request-view/request-view.component';
 
 const userViewState = { name: 'user-view', component: UserViewComponent };
@@ -64,6 +67,7 @@ const viewRequestState = { name: 'view-request', component: RequestsComponent };
       ], useHash: true
     }),
     FormsModule,
+    ReactiveFormsModule,
     BrowserAnimationsModule,
     MatToolbarModule,
     MatButtonModule,
@@ -78,7 +82,11 @@ const viewRequestState = { name: 'view-request', component: RequestsComponent };
     MatTableModule,
     MatSortModule,
     MatPaginatorModule,
-    MatBadgeModule
+    MatBadgeModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatAutocompleteModule,
+    MatListModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

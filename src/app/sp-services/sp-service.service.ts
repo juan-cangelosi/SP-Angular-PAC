@@ -4,10 +4,17 @@ import { sp, Web } from '@pnp/sp';
 @Injectable({
   providedIn: 'root'
 })
-export class SpServiceService {
+export class SpService {
 
   private web: Web;
 
-  constructor() { 
+  constructor() {
+    sp.setup(
+      {
+        defaultCachingStore: 'session', // or "local"
+        defaultCachingTimeoutSeconds: 30,
+        globalCacheDisable: false
+      }
+    );
   }
 }
