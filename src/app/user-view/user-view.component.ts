@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSort, MatTableDataSource } from '@angular/material';
 import { UIRouter } from '@uirouter/core';
+import { trigger, state, transition, style, animate } from '@angular/animations';
 
 export interface PACRequest {
   id: string;
@@ -30,7 +31,14 @@ const ELEMENT_DATA: PACRequest[] = [
 @Component({
   selector: 'app-user-view',
   templateUrl: './user-view.component.html',
-  styleUrls: ['./user-view.component.css']
+  styleUrls: ['./user-view.component.css'],
+  animations: [
+    trigger('detailExpand', [
+      state('collapsed', style({height: '0px', minHeight: '0', display: 'none'})),
+      state('expanded', style({height: '*'})),
+      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+    ]),
+  ]
 })
 export class UserViewComponent implements OnInit {
 

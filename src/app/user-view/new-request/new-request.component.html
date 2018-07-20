@@ -1,79 +1,85 @@
-<form class="example-form">
-  <mat-form-field class="example-full-width">
-    <mat-select placeholder="Type of Request" required>
-      <mat-option value="option">Vacation</mat-option>
-      <mat-option value="option">Travel</mat-option>
-    </mat-select>
-  </mat-form-field>
+<mat-card class="example-card">
+  <mat-card-title>
+    Create a Request
+  </mat-card-title>
+  <form class="example-form">
+    <mat-form-field class="example-full-width">
+      <mat-select placeholder="Type of Request" required>
+        <mat-option value="option">Vacation</mat-option>
+        <mat-option value="option">Travel</mat-option>
+      </mat-select>
+    </mat-form-field>
 
-  <table class="example-full-width">
-    <tbody>
-      <tr>
-        <td>
-          <mat-form-field class="example-full-width">
-            <input matInput [matDatepicker]="pickerStart" placeholder="Start Date">
-            <mat-datepicker-toggle matSuffix [for]="pickerStart"></mat-datepicker-toggle>
-            <mat-datepicker #pickerStart></mat-datepicker>
-          </mat-form-field>
-        </td>
-        <td>
-          <mat-form-field class="example-full-width">
-            <input matInput placeholder="Start Hour">
-          </mat-form-field>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+    <table class="example-full-width">
+      <tbody>
+        <tr>
+          <td>
+            <mat-form-field class="example-full-width">
+              <input matInput [matDatepicker]="pickerStart" placeholder="Start Date">
+              <mat-datepicker-toggle matSuffix [for]="pickerStart"></mat-datepicker-toggle>
+              <mat-datepicker #pickerStart></mat-datepicker>
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Start Hour">
+            </mat-form-field>
+          </td>
+        </tr>
+      </tbody>
+    </table>
 
-  <table class="example-full-width">
-    <tbody>
-      <tr>
-        <td>
-          <mat-form-field class="example-full-width">
-            <input matInput [matDatepicker]="pickerFinish" placeholder="Finish Date">
-            <mat-datepicker-toggle matSuffix [for]="pickerFinish"></mat-datepicker-toggle>
-            <mat-datepicker #pickerFinish></mat-datepicker>
-          </mat-form-field>
-        </td>
-        <td>
-          <mat-form-field class="example-full-width">
-            <input matInput placeholder="Finish Hour">
-          </mat-form-field>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+    <table class="example-full-width">
+      <tbody>
+        <tr>
+          <td>
+            <mat-form-field class="example-full-width">
+              <input matInput [matDatepicker]="pickerFinish" placeholder="Finish Date">
+              <mat-datepicker-toggle matSuffix [for]="pickerFinish"></mat-datepicker-toggle>
+              <mat-datepicker #pickerFinish></mat-datepicker>
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Finish Hour">
+            </mat-form-field>
+          </td>
+        </tr>
+      </tbody>
+    </table>
 
-  <mat-form-field class="example-full-width">
-    <textarea matInput placeholder="Reason"></textarea>
-  </mat-form-field>
-
-
-
-  <mat-form-field class="example-full-width">
-    <input matInput placeholder="Send Request To" aria-label="Manager" [matAutocomplete]="auto" [formControl]="requestToCtrl">
-    <mat-autocomplete #auto="matAutocomplete">
-      <mat-option *ngFor="let manager of managers" [value]="manager.name">
-        {{manager.LoginName}}
-      </mat-option>
-    </mat-autocomplete>
-  </mat-form-field>
-
-  <div class="example-full-width">
-    <button type="button" mat-raised-button (click)="imgFileInput.click()">Add Attachment</button>
-    <input hidden type="file" #imgFileInput (change)="uploadFile($event)" />
-  </div>
-
-  <mat-list>
-    <mat-list-item> Doc 1
-      <span class="example-fill-remaining-space"></span>
-      <button mat-icon-button>
-        <mat-icon>clear</mat-icon>
-      </button>
-    </mat-list-item>
-  </mat-list>
+    <mat-form-field class="example-full-width">
+      <textarea matInput placeholder="Reason"></textarea>
+    </mat-form-field>
 
 
 
-  <button mat-raised-button color="primary" (click)="sendButton()">Send Request</button>
-</form>
+    <mat-form-field class="example-full-width">
+      <input matInput placeholder="Send Request To" aria-label="Manager" [matAutocomplete]="auto" [formControl]="requestToCtrl">
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option *ngFor="let manager of managers" [value]="manager.name">
+          {{manager.LoginName}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+
+    <div class="example-full-width">
+      <button type="button" mat-raised-button (click)="imgFileInput.click()">Add Attachment</button>
+      <input hidden type="file" #imgFileInput (change)="uploadFile($event)" />
+    </div>
+
+    <mat-list>
+      <mat-list-item> Doc 1
+        <span class="example-fill-remaining-space"></span>
+        <button mat-icon-button>
+          <mat-icon>clear</mat-icon>
+        </button>
+      </mat-list-item>
+    </mat-list>
+
+
+
+    <button mat-raised-button color="primary" (click)="sendRequest()">Send Request</button>
+  </form>
+
+</mat-card>

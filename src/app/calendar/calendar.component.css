@@ -6,3 +6,15 @@
 .calendar-table {
     width: 100%;
 }
+
+.calendar-card{
+    padding: 0;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin: 0;
+    text-align: center
+}
+
+.mat-card>.mat-card-actions:last-child {
+    margin-bottom: 0px;
+}

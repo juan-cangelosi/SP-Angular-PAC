@@ -7,7 +7,7 @@ import { UIRouter } from '@uirouter/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  
+
   public esAdmin: boolean;
 
   constructor(public uiRouter: UIRouter) {

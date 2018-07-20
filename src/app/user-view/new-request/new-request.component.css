@@ -6,8 +6,9 @@
   margin: 0 auto;
 }
 
-.example-full-width {
-  width: 100%;
+.example-card {
+  margin: 5px;
+  text-align: center;
 }
 
 .example-fill-remaining-space {
@@ -15,3 +16,9 @@
      Every toolbar row uses a flexbox row layout. */
   flex: 1 1 auto;
 }
+
+.example-full-width {
+  width: 100%;
+}
+
+

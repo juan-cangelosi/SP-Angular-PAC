@@ -27,7 +27,7 @@
     <tr *ngFor="let daysRow of monthDays">
       <td *ngFor="let dayCol of daysRow">
           <!-- <button mat-button>{{dayCol}}</button> -->
-        <mat-card class="example-card">
+        <mat-card class="calendar-card">
           <mat-card-header>
             <mat-card-title>{{dayCol}}</mat-card-title>
           </mat-card-header>
@@ -36,7 +36,7 @@
               Notificaciones!
             </p>
           </mat-card-content>
-          <mat-card-actions>
+          <mat-card-actions class="calendar-actions">
             <button mat-button>Ver</button>
             <button mat-button>Modificar</button>
           </mat-card-actions>
@@ -45,4 +45,3 @@
     </tr>
   </tbody>
 </table>
-<mat-calendar></mat-calendar>

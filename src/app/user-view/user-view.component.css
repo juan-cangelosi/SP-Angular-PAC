@@ -3,9 +3,9 @@ table {
 }
 
 .floating-add-button {
-  position: fixed;
-  bottom: 16px;
-  right: 16px;
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
 }
 
 tr.example-detail-row {
@@ -27,6 +27,10 @@ tr.example-element-row:not(.example-expanded-row):active {
 .example-element-detail {
   overflow: hidden;
   display: flex;
+}
+
+.relative-container {
+  position: relative;
 }
 
 .example-element-diagram {
