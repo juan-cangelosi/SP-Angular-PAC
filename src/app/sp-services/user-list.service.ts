@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { sp } from '@pnp/sp';
-import { User } from '../DTOs/User';
+import { User } from '../models/User';
 
 @Injectable({
   providedIn: 'root'
@@ -23,5 +23,29 @@ export class UserListService {
       isManager = false;
     }
     return isManager;
+  }
+
+  public async getManagers(): Promise<User[]> {
+    const managers: User[] = new Array<User>();
+    const web = sp.web;
+    const resJson = await web.siteGroups.getByName('PACManager').users.get();
+    for (const item of resJson) {
+      const manager: User = new User();
+      manager.PrepareDTO(item);
+      managers.push(manager);
+    }
+    return managers;
+  }
+
+  public async getUsers(): Promise<User[]> {
+    const users: User[] = new Array<User>();
+    const web = sp.web;
+    const resJson = await web.siteUsers.get();
+    for (const item of resJson) {
+      const user: User = new User();
+      user.PrepareDTO(item);
+      users.push(user);
+    }
+    return users;
   }
 }

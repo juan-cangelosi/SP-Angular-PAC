@@ -11,31 +11,19 @@ import { UserViewComponent } from './user-view/user-view.component';
 import { AdminViewComponent } from './admin-view/admin-view.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { NewRequestComponent } from './user-view/new-request/new-request.component';
-import {
-  MatToolbarModule,
-  MatButtonModule,
-  MatSidenavModule,
-  MatIconModule,
-  MatListModule,
-  MatDatepickerModule,
-  MatNativeDateModule,
-  MatOptionModule,
-  MatSelectModule,
-  MatCardModule,
-  MatTableModule,
-  MatSortModule,
-  MatPaginatorModule,
-  MatBadgeModule,
-  MatFormFieldModule,
-  MatInputModule,
-  MatAutocompleteModule
-} from '@angular/material';
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { HeaderComponent } from './header/header.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RequestViewComponent } from './request-view/request-view.component';
 import { RequestResponseComponent } from './admin-view/requests/request-response.component';
+import { MaterialModule } from './material.module';
+import { PacFolderCreationService } from './sp-services/pac-folder-creation.service';
+import { PacRequestListService } from './sp-services/pac-request-list.service';
+import { PacResponseListService } from './sp-services/pac-response-list.service';
+import { UserListService } from './sp-services/user-list.service';
+import { SpService } from './sp-services/sp-service.service';
 
 const userViewState = { name: 'user-view', component: UserViewComponent };
 const adminViewState = { name: 'admin-view', component: AdminViewComponent };
@@ -68,26 +56,15 @@ const adminRequestsState = { name: 'request-response', component: RequestRespons
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    MatToolbarModule,
-    MatButtonModule,
-    MatSidenavModule,
-    MatIconModule,
-    MatListModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    MatCardModule,
-    MatOptionModule,
-    MatSelectModule,
-    MatTableModule,
-    MatSortModule,
-    MatPaginatorModule,
-    MatBadgeModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatAutocompleteModule,
-    MatListModule
+    MaterialModule
   ],
-  providers: [],
+  providers: [
+    PacFolderCreationService,
+    PacRequestListService,
+    PacResponseListService,
+    UserListService,
+    SpService
+  ],
   entryComponents: [
     AppComponent,
     UserViewComponent,

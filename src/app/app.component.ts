@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UIRouter } from '@uirouter/core';
+import { SpService } from './sp-services/sp-service.service';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +11,7 @@ export class AppComponent implements OnInit {
 
   public esAdmin: boolean;
 
-  constructor(public uiRouter: UIRouter) {
+  constructor(public uiRouter: UIRouter, public spService: SpService) {
 
   }
 
@@ -21,6 +22,5 @@ export class AppComponent implements OnInit {
     } else {
       this.uiRouter.stateService.go('user-view');
     }
-
   }
 }
