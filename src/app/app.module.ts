@@ -24,6 +24,9 @@ import { PacRequestListService } from './sp-services/pac-request-list.service';
 import { PacResponseListService } from './sp-services/pac-response-list.service';
 import { UserListService } from './sp-services/user-list.service';
 import { SpService } from './sp-services/sp-service.service';
+import { AdminViewService } from './admin-view/admin-view.service';
+import { UserViewService } from './user-view/user-view.service';
+import { CalendarService } from './calendar/calendar.service';
 
 const userViewState = { name: 'user-view', component: UserViewComponent };
 const adminViewState = { name: 'admin-view', component: AdminViewComponent };
@@ -59,11 +62,17 @@ const adminRequestsState = { name: 'request-response', component: RequestRespons
     MaterialModule
   ],
   providers: [
+    // Sharepoint Services
     PacFolderCreationService,
     PacRequestListService,
     PacResponseListService,
     UserListService,
-    SpService
+    SpService,
+
+    // Component Services
+    AdminViewService,
+    UserViewService,
+    CalendarService,
   ],
   entryComponents: [
     AppComponent,

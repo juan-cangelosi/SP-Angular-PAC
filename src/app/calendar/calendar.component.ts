@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CalendarService } from './calendar.service';
 
 @Component({
   selector: 'app-calendar',
@@ -35,7 +36,7 @@ export class CalendarComponent implements OnInit {
   public selectedMonth: string;
   public selectedYear: number;
 
-  constructor() {
+  constructor(public calendarService: CalendarService) {
     this.monthDays = new Array<Array <number>>();
     this.years = new Array<number>();
     const currentDate = new Date();

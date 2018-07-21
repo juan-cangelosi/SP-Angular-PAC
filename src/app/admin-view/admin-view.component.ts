@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSort, MatTableDataSource } from '@angular/material';
 import { UIRouter } from '@uirouter/core';
+import { AdminViewService } from './admin-view.service';
 
 export interface PACRequest {
   id: string;
@@ -43,7 +44,7 @@ export class AdminViewComponent implements OnInit {
 
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(public uiRouter: UIRouter) {
+  constructor(public uiRouter: UIRouter, public adminViewService: AdminViewService) {
 
   }
 

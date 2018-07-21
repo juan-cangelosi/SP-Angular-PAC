@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSort, MatTableDataSource } from '@angular/material';
 import { UIRouter } from '@uirouter/core';
 import { trigger, state, transition, style, animate } from '@angular/animations';
+import { UserViewService } from './user-view.service';
 
 export interface PACRequest {
   id: string;
@@ -49,12 +50,13 @@ export class UserViewComponent implements OnInit {
 
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(public uiRouter: UIRouter) {
+  constructor(public uiRouter: UIRouter, public userViewService: UserViewService) {
 
   }
 
   ngOnInit() {
     this.dataSource.sort = this.sort;
+    this.userViewService.test();
   }
 
   public goToNewRequest() {
