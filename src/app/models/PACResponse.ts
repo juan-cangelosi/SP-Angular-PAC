@@ -3,6 +3,8 @@ export class PACResponse {
   ID: number;
   Title: string;
   PACRequest: any;
+  PACResponse: string;
+  PACResponseType: string;
   ContentType: any;
   Attachments: any;
   Order;
@@ -16,6 +18,8 @@ export class PACResponse {
     if (jsonObj['ID'] != null) { this.ID = jsonObj['ID']; }
     if (jsonObj['Title'] != null) { this.Title = jsonObj['Title']; }
     if (jsonObj['PACRequest'] != null) { this.PACRequest = jsonObj['PACRequest']; }
+    if (jsonObj['PACResponse'] != null) { this.PACResponse = jsonObj['PACResponse']; }
+    if (jsonObj['PACResponseType'] != null) { this.PACResponseType = jsonObj['PACResponseType']; }
     if (jsonObj['ContentType'] != null) { this.ContentType = jsonObj['ContentType']; }
     if (jsonObj['Attachments'] != null) { this.Attachments = jsonObj['Attachments']; }
     if (jsonObj['Order'] != null) { this.Order = jsonObj['Order']; }

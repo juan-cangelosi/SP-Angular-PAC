@@ -27,6 +27,8 @@ import { SpService } from './sp-services/sp-service.service';
 import { AdminViewService } from './admin-view/admin-view.service';
 import { UserViewService } from './user-view/user-view.service';
 import { CalendarService } from './calendar/calendar.service';
+import { LoaderComponent } from './loader/loader.component';
+import { LoaderService } from './loader/loader.service';
 
 const userViewState = { name: 'user-view', component: UserViewComponent };
 const adminViewState = { name: 'admin-view', component: AdminViewComponent };
@@ -43,7 +45,8 @@ const adminRequestsState = { name: 'request-response', component: RequestRespons
     NewRequestComponent,
     HeaderComponent,
     RequestViewComponent,
-    RequestResponseComponent
+    RequestResponseComponent,
+    LoaderComponent,
   ],
   imports: [
     BrowserModule,
@@ -69,6 +72,9 @@ const adminRequestsState = { name: 'request-response', component: RequestRespons
     UserListService,
     SpService,
 
+    // Utility Services
+    LoaderService,
+
     // Component Services
     AdminViewService,
     UserViewService,
@@ -82,7 +88,8 @@ const adminRequestsState = { name: 'request-response', component: RequestRespons
     NewRequestComponent,
     HeaderComponent,
     RequestViewComponent,
-    RequestResponseComponent
+    RequestResponseComponent,
+    LoaderComponent
   ]
 })
 export class AppModule {

@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import { sp, SharingRole } from '@pnp/sp';
 import { PACRequest } from '../models/PACRequest';
 import { UserListService } from './user-list.service';
+import { PacFolderCreationService } from './pac-folder-creation.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PacRequestListService {
 
-  constructor(public userListService: UserListService) { }
+  constructor(public userListService: UserListService, public pacFolderCreationService: PacFolderCreationService) { }
 
   public async getMyPACRequests(): Promise<PACRequest[]> {
     const user = await this.userListService.getCurrentUser();
@@ -42,6 +43,8 @@ export class PacRequestListService {
       PACRequestType: request.PACRequestType
     };
     const response = await sp.web.lists.getByTitle('PACRequest').items.add(insertObject);
+    const user = await this.userListService.getCurrentUser();
+    this.pacFolderCreationService.moveItemsToFolder('PACRequest', user.Email, [+response.data.Id]);
     await response.item.shareWith(request.PACRequestTo.LoginName, SharingRole.View);
   }
 
