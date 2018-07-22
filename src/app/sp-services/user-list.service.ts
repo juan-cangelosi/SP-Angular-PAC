@@ -12,6 +12,7 @@ export class UserListService {
   public async getCurrentUser(): Promise<User> {
     const currentUser = await sp.web.currentUser.usingCaching().get();
     const user: User = new User();
+    console.log(currentUser);
     user.PrepareDTO(currentUser);
     return user;
   }

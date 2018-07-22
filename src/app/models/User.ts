@@ -11,7 +11,7 @@ export class User {
 
     PrepareDTO(jsonObj: any): void {
         if (jsonObj == null) { return; }
-        if (jsonObj['ID'] != null) { this.ID = jsonObj['ID']; }
+        if (jsonObj['Id'] != null) { this.ID = jsonObj['Id']; }
         if (jsonObj['LoginName'] != null) { this.LoginName = jsonObj['LoginName']; }
         if (jsonObj['IsSiteAdmin'] != null) { this.IsAdmin = jsonObj['IsSiteAdmin']; }
         if (jsonObj['Email'] != null) { this.Email = jsonObj['Email']; }

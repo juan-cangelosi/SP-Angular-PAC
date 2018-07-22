@@ -10,7 +10,7 @@ export class UserViewService {
   constructor(public pacRequestList: PacRequestListService, public pacResponseService: PacResponseListService) { }
 
   public async test() {
-    const requests = await this.pacRequestList.getPACRequests();
+    const requests = await this.pacRequestList.getMyPACRequests();
     const responses = await this.pacResponseService.getPACResponses();
     console.log(requests);
     console.log(responses);
