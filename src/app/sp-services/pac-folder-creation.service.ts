@@ -34,10 +34,9 @@ export class PacFolderCreationService {
     const auxRes = await web.lists.getByTitle(list).items.filter(`Title eq '${subfolder}'`).get();
     let folderItem: Item;
     if (auxRes.length < 1) {
-      const addRes = await web.lists.getByTitle(list).items.add(
-        { Title: `${subfolder}`, ContentTypeId: '0x0120', FileLeafRef: `${subfolder}`  }
-      );
+      const addRes = await web.lists.getByTitle(list).items.add({ Title: `${subfolder}`, ContentTypeId: '0x0120' });
       folderItem = addRes.item;
+      await addRes.item.update({ FileLeafRef: `${subfolder}` });
     } else {
       folderItem = web.lists.getByTitle(list).items.getById(auxRes[0].Id);
     }

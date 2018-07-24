@@ -1,25 +1,25 @@
 export class PACResponse {
 
-  ID: number;
+  Id: number;
   Title: string;
-  PACRequest: any;
+  PACRequest: any = '';
   PACResponse: string;
-  PACResponseType: string;
-  ContentType: any;
-  Attachments: any;
-  Order;
+  PACResponseReason: any = '';
+  ContentType: any = '';
+  Attachments: any = '';
+  Order: number;
   Name: Blob;
-  PropertyBag: any;
+  PropertyBag: any = '';
 
   constructor() { }
 
   PrepareDTO(jsonObj: any): void {
     if (jsonObj == null) { return; }
-    if (jsonObj['ID'] != null) { this.ID = jsonObj['ID']; }
+    if (jsonObj['Id'] != null) { this.Id = jsonObj['Id']; }
     if (jsonObj['Title'] != null) { this.Title = jsonObj['Title']; }
     if (jsonObj['PACRequest'] != null) { this.PACRequest = jsonObj['PACRequest']; }
     if (jsonObj['PACResponse'] != null) { this.PACResponse = jsonObj['PACResponse']; }
-    if (jsonObj['PACResponseType'] != null) { this.PACResponseType = jsonObj['PACResponseType']; }
+    if (jsonObj['PACResponseReason'] != null) { this.PACResponseReason = jsonObj['PACResponseReason']; }
     if (jsonObj['ContentType'] != null) { this.ContentType = jsonObj['ContentType']; }
     if (jsonObj['Attachments'] != null) { this.Attachments = jsonObj['Attachments']; }
     if (jsonObj['Order'] != null) { this.Order = jsonObj['Order']; }
@@ -28,7 +28,7 @@ export class PACResponse {
   }
 
   public isNewEntity(): boolean {
-    return this.ID === 0;
+    return this.Id === 0;
   }
 
 }

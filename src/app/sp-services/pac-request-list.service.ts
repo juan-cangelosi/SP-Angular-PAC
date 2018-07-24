@@ -13,7 +13,7 @@ export class PacRequestListService {
 
   public async getMyPACRequests(): Promise<PACRequest[]> {
     const user = await this.userListService.getCurrentUser();
-    const items = await sp.web.lists.getByTitle('PACRequest').items.filter(`AuthorId eq '${user.ID}' and Title eq null`).get();
+    const items = await sp.web.lists.getByTitle('PACRequest').items.filter(`AuthorId eq '${user.Id}' and Title eq null`).get();
     const parsedItems: PACRequest[] = new Array<PACRequest>();
     for (const item of items) {
       console.log(item);
@@ -24,7 +24,7 @@ export class PacRequestListService {
 
   public async getUserRequests(): Promise<PACRequest[]> {
     const user = await this.userListService.getCurrentUser();
-    const items = await sp.web.lists.getByTitle('PACRequest').items.filter(`RequestToId eq '${user.ID}'`).get();
+    const items = await sp.web.lists.getByTitle('PACRequest').items.filter(`RequestToId eq '${user.Id}'`).get();
     const parsedItems: PACRequest[] = new Array<PACRequest>();
     for (const item of items) {
       console.log(item);
@@ -35,10 +35,10 @@ export class PacRequestListService {
 
   public async addRequest(request: PACRequest) {
     const insertObject = {
-      PACRequestToId: request.PACRequestTo.ID,
+      PACRequestToId: request.PACRequestTo.Id,
       PACDateFrom: this.getSharepointDate(request.PACDateTo),
       PACDateTo: this.getSharepointDate(request.PACDateTo),
-      PACRequestStatus: 'pending',
+      PACRequestStatus: 'Pending',
       PACReason: request.PACReason,
       PACRequestType: request.PACRequestType
     };
@@ -51,7 +51,8 @@ export class PacRequestListService {
   private getSharepointDate(date: Date) {
     let spDate: string;
     const month: number = date.getMonth() + 1;
-    spDate = date.getFullYear() + '-' + month + '-' + date.getDate() + 'T' + date.getHours() + date.getMinutes();
+    spDate = date.getFullYear() + '-' + month + '-' + date.getDate() + 'T'
+      + date.getHours() + ':' + (date.getMinutes() < 10 ? '0' : '') + date.getMinutes();
     return spDate;
   }
 }

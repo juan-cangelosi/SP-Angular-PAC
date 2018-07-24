@@ -19,7 +19,8 @@ import {
   MatInputModule,
   MatAutocompleteModule,
   MatChipsModule,
-  MatDialogModule
+  MatDialogModule,
+  MatProgressSpinnerModule,
 } from '@angular/material';
 
 @NgModule({
@@ -45,6 +46,7 @@ import {
     MatListModule,
     MatChipsModule,
     MatDialogModule,
+    MatProgressSpinnerModule
   ],
   exports: [
     MatToolbarModule,
@@ -67,6 +69,7 @@ import {
     MatListModule,
     MatChipsModule,
     MatDialogModule,
+    MatProgressSpinnerModule
   ],
   declarations: []
 })

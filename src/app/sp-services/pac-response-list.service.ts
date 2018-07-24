@@ -21,11 +21,22 @@ export class PacResponseListService {
     return parsedItems;
   }
 
+  public async getMyPACResponses() {
+    const user = await this.userListService.getCurrentUser();
+    const items = await sp.web.lists.getByTitle('PACResponse').items.expand('PACRequest').filter(`PACRequestAuthor eq '${user.Id}'`).get();
+    const parsedItems: PACResponse[] = new Array<PACResponse>();
+    for (const item of items) {
+      console.log(item);
+      // set item;
+    }
+    return parsedItems;
+  }
+
   public async addResponse(request: PACResponse) {
     const insertObject = {
       PACRequestId: request.PACRequest.Id,
       PACResponse: request.PACResponse,
-      PACResponseType: request.PACResponseType,
+      PACResponseReason: request.PACResponseReason,
     };
     const response = await sp.web.lists.getByTitle('PACResponse').items.add(insertObject);
     const user = await this.userListService.getCurrentUser();
