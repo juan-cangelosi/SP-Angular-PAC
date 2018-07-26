@@ -1,9 +1,21 @@
-.example-form {
-  min-width: 150px;
+.flex-col {
+   /* min-width: 150px;
   max-width: 500px;
   width: 100%;
   text-align: center;
   margin: 0 auto;
+  */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.flex-row {
+  flex-flow: row wrap;
+}
+
+.col-6 {
+  width: 50%;
 }
 
 .example-card {

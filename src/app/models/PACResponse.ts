@@ -21,10 +21,6 @@ export class PACResponse {
     if (jsonObj['PACResponse'] != null) { this.PACResponse = jsonObj['PACResponse']; }
     if (jsonObj['PACResponseReason'] != null) { this.PACResponseReason = jsonObj['PACResponseReason']; }
     if (jsonObj['ContentType'] != null) { this.ContentType = jsonObj['ContentType']; }
-    if (jsonObj['Attachments'] != null) { this.Attachments = jsonObj['Attachments']; }
-    if (jsonObj['Order'] != null) { this.Order = jsonObj['Order']; }
-    if (jsonObj['Name'] != null) { this.Name = jsonObj['Name']; }
-    if (jsonObj['PropertyBag'] != null) { this.PropertyBag = jsonObj['PropertyBag']; }
   }
 
   public isNewEntity(): boolean {

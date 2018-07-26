@@ -21,14 +21,15 @@ export class PacResponseListService {
     return parsedItems;
   }
 
-  public async getMyPACResponses() {
+  public async getMyPACResponses(): Promise<PACResponse[]>  {
     const user = await this.userListService.getCurrentUser();
     const items = await sp.web.lists.getByTitle('PACResponse').items.expand('PACRequest').filter(`PACRequestAuthor eq '${user.Id}'`).get();
     const parsedItems: PACResponse[] = new Array<PACResponse>();
     for (const item of items) {
-      console.log(item);
-      // set item;
+      const parsedItem = new PACResponse();
+      parsedItem.PrepareDTO(item);
     }
+    console.log(parsedItems);
     return parsedItems;
   }
 

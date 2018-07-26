@@ -1,4 +1,5 @@
 import { User } from 'src/app/models/User';
+import { Attachment } from './Attachment';
 
 export class PACRequest {
 
@@ -7,17 +8,21 @@ export class PACRequest {
   PACRequestTo: User;
   PACNotify: any = '';
   PACDateFrom: Date;
+  PACHourFrom: string;
   PACDateTo: Date;
+  PACHourTo: string;
   PACRequestStatus: string;
   PACReason: any;
   PACRequestType = '';
   ContentType: any = '';
-  Attachments: any = '';
+  Attachments: Attachment[];
   Order: number;
   Name: Blob;
   PropertyBag: any = '';
 
-  constructor() { }
+  constructor() {
+    this.Attachments = new Array<Attachment>();
+  }
 
   PrepareDTO(jsonObj: any): void {
     if (jsonObj == null) { return; }
@@ -25,20 +30,37 @@ export class PACRequest {
     if (jsonObj['Title'] != null) { this.Title = jsonObj['Title']; }
     if (jsonObj['PACRequestTo'] != null) { this.PACRequestTo = jsonObj['PACRequestTo']; }
     if (jsonObj['PACNotify'] != null) { this.PACNotify = jsonObj['PACNotify']; }
-    if (jsonObj['PACDateFrom'] != null) { this.PACDateFrom = jsonObj['PACDateFrom']; }
-    if (jsonObj['PACDateTo'] != null) { this.PACDateTo = jsonObj['PACDateTo']; }
+    if (jsonObj['PACDateFrom'] != null) {
+      this.PACDateFrom = new Date(jsonObj['PACDateFrom']);
+      this.PACHourFrom = this.addZero(this.PACDateFrom.getHours()) + ':' + this.addZero(this.PACDateFrom.getMinutes());
+    }
+    if (jsonObj['PACDateTo'] != null) {
+      this.PACDateTo = new Date(jsonObj['PACDateTo']);
+      this.PACHourTo = this.addZero(this.PACDateTo.getHours()) + ':' + this.addZero(this.PACDateTo.getMinutes());
+    }
     if (jsonObj['PACRequestStatus'] != null) { this.PACRequestStatus = jsonObj['PACRequestStatus']; }
     if (jsonObj['PACReason'] != null) { this.PACReason = jsonObj['PACReason']; }
     if (jsonObj['PACRequestType'] != null) { this.PACRequestType = jsonObj['PACRequestType']; }
     if (jsonObj['ContentType'] != null) { this.ContentType = jsonObj['ContentType']; }
-    if (jsonObj['Attachments'] != null) { this.Attachments = jsonObj['Attachments']; }
-    if (jsonObj['Order'] != null) { this.Order = jsonObj['Order']; }
-    if (jsonObj['Name'] != null) { this.Name = jsonObj['Name']; }
-    if (jsonObj['PropertyBag'] != null) { this.PropertyBag = jsonObj['PropertyBag']; }
   }
 
   public isNewEntity(): boolean {
     return this.Id === 0;
+  }
+
+  private getSharepointDate(date: Date) {
+    let spDate: string;
+    const month: number = date.getMonth() + 1;
+    spDate = date.getFullYear() + '-' + month + '-' + date.getDate() + 'T'
+      + date.getHours() + ':' + (date.getMinutes() < 10 ? '0' : '') + date.getMinutes();
+    return spDate;
+  }
+
+  private addZero(i: number): string {
+    if (i < 10) {
+      return '0' + i;
+    }
+    return `${i}`;
   }
 
 }

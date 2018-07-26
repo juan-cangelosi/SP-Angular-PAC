@@ -2,74 +2,59 @@
   <mat-card-title>
     Create a Request
   </mat-card-title>
-  <form class="example-form">
-    <mat-form-field class="example-full-width">
-      <mat-select placeholder="Type of Request" required>
-        <mat-option value="option">Vacation</mat-option>
-        <mat-option value="option">Travel</mat-option>
+  <form class="flex-col">
+    <mat-form-field class="flex-row">
+      <mat-select name="pacRequestType" placeholder="Type of Request" [(ngModel)]="request.PACRequestType" required>
+        <mat-option *ngFor="let typeRequest of requestTypes" [value]="typeRequest">{{typeRequest}}</mat-option>
       </mat-select>
     </mat-form-field>
 
-    <table class="example-full-width">
-      <tbody>
-        <tr>
-          <td>
-            <mat-form-field class="example-full-width">
-              <input matInput [matDatepicker]="pickerStart" placeholder="Start Date">
-              <mat-datepicker-toggle matSuffix [for]="pickerStart"></mat-datepicker-toggle>
-              <mat-datepicker #pickerStart></mat-datepicker>
-            </mat-form-field>
-          </td>
-          <td>
-            <mat-form-field class="example-full-width">
-              <input matInput placeholder="Start Hour">
-            </mat-form-field>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="flex-row">
+      <mat-form-field class="col-6">
+        <input name="pacDateFrom" matInput [matDatepicker]="pickerStart" [(ngModel)]="request.PACDateFrom" placeholder="Start Date">
+        <mat-datepicker-toggle matSuffix [for]="pickerStart"></mat-datepicker-toggle>
+        <mat-datepicker #pickerStart></mat-datepicker>
+      </mat-form-field>
 
-    <table class="example-full-width">
-      <tbody>
-        <tr>
-          <td>
-            <mat-form-field class="example-full-width">
-              <input matInput [matDatepicker]="pickerFinish" placeholder="Finish Date">
-              <mat-datepicker-toggle matSuffix [for]="pickerFinish"></mat-datepicker-toggle>
-              <mat-datepicker #pickerFinish></mat-datepicker>
-            </mat-form-field>
-          </td>
-          <td>
-            <mat-form-field class="example-full-width">
-              <input matInput placeholder="Finish Hour">
-            </mat-form-field>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+      <mat-form-field class="col-6">
+        <input name="pacHourFrom" matInput placeholder="Start Hour"  [(ngModel)]="request.PACHourFrom">
+      </mat-form-field>
+    </div>
 
-    <mat-form-field class="example-full-width">
-      <textarea matInput placeholder="Reason"></textarea>
+    <div class="flex-row">
+      <mat-form-field class="col-6">
+        <input name="pacDateFrom" matInput [matDatepicker]="pickerFinish" [(ngModel)]="request.PACDateTo" placeholder="Finish Date">
+        <mat-datepicker-toggle matSuffix [for]="pickerFinish"></mat-datepicker-toggle>
+        <mat-datepicker #pickerFinish></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field class="col-6">
+        <input name="pacHourFrom" matInput placeholder="Finish Hour " [(ngModel)]="request.PACHourTo">
+      </mat-form-field>
+    </div>
+
+    <mat-form-field class="flex-row">
+      <textarea name="pacReason" matInput placeholder="Reason" [(ngModel)]="request.PACReason"></textarea>
     </mat-form-field>
 
 
 
-    <mat-form-field class="example-full-width">
-      <input matInput placeholder="Send Request To" aria-label="Manager" [matAutocomplete]="auto" [formControl]="requestToCtrl">
-      <mat-autocomplete #auto="matAutocomplete">
-        <mat-option *ngFor="let manager of managers" [value]="manager.name">
-          {{manager.LoginName}}
+    <mat-form-field class="flex-row">
+      <input name="pacsendTo" matInput placeholder="Send Request To" aria-label="Manager" [matAutocomplete]="auto" [formControl]="requestToCtrl" >
+      <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn" (optionSelected)="optionSelected($event)">
+        <mat-option *ngFor="let manager of managers" [value]="manager" (onSelect)="selected(manager)">
+          {{manager.Name}}
         </mat-option>
       </mat-autocomplete>
     </mat-form-field>
 
-    <div class="example-full-width">
+    <div class="flex-row">
       <button type="button" mat-raised-button (click)="imgFileInput.click()">Add Attachment</button>
-      <input hidden type="file" #imgFileInput (change)="uploadFile($event)" />
+      <input name="attachment" hidden type="file" #imgFileInput (change)="uploadFile($event)" />
     </div>
 
     <mat-list>
-      <mat-list-item> Doc 1
+      <mat-list-item *ngFor="let attachment of request.Attachments"> {{attachment.fileName}}
         <span class="example-fill-remaining-space"></span>
         <button mat-icon-button>
           <mat-icon>clear</mat-icon>

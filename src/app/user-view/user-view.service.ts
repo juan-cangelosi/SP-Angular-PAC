@@ -1,27 +1,32 @@
 import { Injectable } from '@angular/core';
 import { PacRequestListService } from '../sp-services/pac-request-list.service';
-import { PacResponseListService } from '../sp-services/pac-response-list.service';
 import { PACRequest } from '../models/PACRequest';
+import { User } from '../models/User';
+import { UserListService } from '../sp-services/user-list.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserViewService {
 
-  constructor(public pacRequestList: PacRequestListService, public pacResponseService: PacResponseListService) { }
+  constructor(private pacRequestList: PacRequestListService, private userListService: UserListService) { }
 
-  public async test() {
+  public async getRequests(): Promise<PACRequest[]> {
     const requests = await this.pacRequestList.getMyPACRequests();
-    const responses = await this.pacResponseService.getPACResponses();
-    console.log(requests);
-    console.log(responses);
+    return requests;
+  }
 
-    const testRequest = new PACRequest();
-    testRequest.PACDateFrom = new Date();
-    testRequest.PACDateTo = new Date();
-    testRequest.PACReason = 'Testeando insert';
-    testRequest.PACRequestType = 'Vacation';
-    testRequest.PACRequestTo.Id = 3;
-    await this.pacRequestList.addRequest(testRequest);
+  public async getTypeOfRequests(): Promise<string[]> {
+    const typeOfRequests = await this.pacRequestList.getTypeOfRequests();
+    return typeOfRequests;
+  }
+
+  public async getManagers(): Promise<User[]> {
+    const users: User[] = await this.userListService.getManagers();
+    return users;
+  }
+
+  public async addRequest(request: PACRequest) {
+    await this.pacRequestList.addRequest(request);
   }
 }

@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
+import { User } from '../../models/User';
+import { UserViewService } from '../user-view.service';
+import { PACRequest } from 'src/app/models/PACRequest';
+import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 
 @Component({
   selector: 'app-new-request',
@@ -10,24 +14,31 @@ import { map, startWith } from 'rxjs/operators';
 })
 export class NewRequestComponent implements OnInit {
 
-  public managers = [
-    { LoginName: 'John Huschka' },
-    { LoginName: 'Juan Cangelosi' },
-    { LoginName: 'Juan Carlos' },
-  ];
+  public managers: User[];
+  public requestTypes: string[];
+
+  public request: PACRequest;
 
   requestToCtrl = new FormControl();
   filteredRequests: Observable<any[]>;
 
-  constructor() {
+
+  constructor(private userViewService: UserViewService) {
     this.filteredRequests = this.requestToCtrl.valueChanges
       .pipe(
         startWith(''),
         map(manager => manager ? this._filterManagers(manager) : this.managers.slice())
       );
+    this.request = new PACRequest();
   }
 
   ngOnInit() {
+    this.userViewService.getTypeOfRequests().then((requestsType) => {
+      this.requestTypes = requestsType;
+    });
+    this.userViewService.getManagers().then((managers) => {
+      this.managers = managers;
+    });
   }
 
 
@@ -38,11 +49,24 @@ export class NewRequestComponent implements OnInit {
   }
 
   public sendRequest() {
-    console.log('sending');
+    this.userViewService.addRequest(this.request);
+  }
+
+  displayFn(user?: User): string | undefined {
+    return user ? user.Name : undefined;
   }
 
   public uploadFile(event) {
-    
+
+  }
+  
+  public selected(manager: User) {
+    console.log(manager);
+    this.request.PACRequestTo = manager;
+  }
+
+  public optionSelected(event: MatAutocompleteSelectedEvent) {
+    this.request.PACRequestTo = event.option.value;
   }
 
 }

@@ -27,6 +27,6 @@ export class SpService {
     Logger.subscribe(new ConsoleListener());
 
     // set the active log level
-    Logger.activeLogLevel = LogLevel.Verbose;
+    Logger.activeLogLevel = LogLevel.Info;
   }
 }
