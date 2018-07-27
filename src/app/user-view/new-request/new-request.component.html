@@ -50,13 +50,13 @@
 
     <div class="flex-row">
       <button type="button" mat-raised-button (click)="imgFileInput.click()">Add Attachment</button>
-      <input name="attachment" hidden type="file" #imgFileInput (change)="uploadFile($event)" />
+      <input name="attachment" hidden type="file" #imgFileInput (change)="uploadFile()"  multiple />
     </div>
 
     <mat-list>
-      <mat-list-item *ngFor="let attachment of request.Attachments"> {{attachment.fileName}}
+      <mat-list-item *ngFor="let attachment of request.Attachments; let index = index">  {{attachment.fileName}}
         <span class="example-fill-remaining-space"></span>
-        <button mat-icon-button>
+        <button (click)="removeAttachment(index)" mat-icon-button>
           <mat-icon>clear</mat-icon>
         </button>
       </mat-list-item>

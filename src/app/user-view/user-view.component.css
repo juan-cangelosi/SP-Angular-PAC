@@ -31,6 +31,7 @@ tr.example-element-row:not(.example-expanded-row):active {
 
 .relative-container {
   position: relative;
+  min-height: 200px;
 }
 
 .example-element-diagram {
@@ -54,4 +55,9 @@ tr.example-element-row:not(.example-expanded-row):active {
 
 .example-element-description-attribution {
   opacity: 0.5;
+}
+
+.border-info {
+  border: solid;
+  width: 100%;
 }

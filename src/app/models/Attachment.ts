@@ -1,4 +1,9 @@
 export class Attachment {
-    file: Blob;
+    file: any;
     fileName: string;
+    fileOpenUrl: any;
+
+    constructor() {
+
+    }
 }

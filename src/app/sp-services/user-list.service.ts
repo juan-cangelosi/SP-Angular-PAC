@@ -38,6 +38,13 @@ export class UserListService {
     return managers;
   }
 
+  public async getUser(id: number): Promise<User> {
+    const resJson = await sp.web.siteUsers.getById(id).get();
+    const user = new User();
+    user.PrepareDTO(resJson);
+    return user;
+  }
+
   public async getUsers(): Promise<User[]> {
     const users: User[] = new Array<User>();
     const web = sp.web;

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { sp, SharingRole } from '@pnp/sp';
+import { sp, SharingRole, AttachmentFileInfo } from '@pnp/sp';
 import { PACRequest } from '../models/PACRequest';
 import { UserListService } from './user-list.service';
 import { PacFolderCreationService } from './pac-folder-creation.service';
@@ -16,14 +16,20 @@ export class PacRequestListService {
     const user = await this.userListService.getCurrentUser();
     const items = await sp.web.lists.getByTitle('PACRequest').items.filter(`AuthorId eq '${user.Id}' and Title eq null`).get();
     const parsedItems: PACRequest[] = new Array<PACRequest>();
+    console.log(items);
     for (const item of items) {
-      const attachments = await sp.web.lists.getByTitle('PACRequest').items.getById(item.Id).attachmentFiles.get();
-      console.log(attachments);
       const parsedItem = new PACRequest();
       parsedItem.PrepareDTO(item);
+      const attachments = await sp.web.lists.getByTitle('PACRequest').items.getById(item.Id).attachmentFiles.get();
+      for (const attachmentItem of attachments) {
+        console.log(attachmentItem);
+        const attachment = new Attachment();
+        attachment.fileName = attachmentItem.FileName;
+        attachment.fileOpenUrl = attachmentItem.ServerRelativeUrl;
+        parsedItem.Attachments.push(attachment);
+      }
       parsedItems.push(parsedItem);
     }
-    console.log(parsedItems);
     return parsedItems;
   }
 
@@ -31,17 +37,19 @@ export class PacRequestListService {
     const user = await this.userListService.getCurrentUser();
     const items = await sp.web.lists.getByTitle('PACRequest').items.filter(`RequestToId eq '${user.Id}'`).get();
     const parsedItems: PACRequest[] = new Array<PACRequest>();
+    console.log(items);
     for (const item of items) {
       const parsedItem = new PACRequest();
       parsedItem.PrepareDTO(item);
       const attachments = await sp.web.lists.getByTitle('PACRequest').items.getById(item.Id).attachmentFiles.get();
       for (const attachmentItem of attachments) {
+        console.log(attachmentItem);
         const attachment = new Attachment();
         attachment.fileName = attachmentItem.fileName;
         parsedItem.Attachments.push(attachment);
       }
+      parsedItems.push(parsedItem);
     }
-    console.log(parsedItems);
     return parsedItems;
   }
 
@@ -65,6 +73,11 @@ export class PacRequestListService {
     };
     console.log(insertObject);
     const response = await sp.web.lists.getByTitle('PACRequest').items.add(insertObject);
+    const fileInfos: AttachmentFileInfo[] = [];
+    for (const attachment of request.Attachments) {
+      fileInfos.push({name: attachment.fileName, content: attachment.file});
+    }
+    response.item.attachmentFiles.addMultiple(fileInfos);
     const user = await this.userListService.getCurrentUser();
     this.pacFolderCreationService.moveItemsToFolder('PACRequest', user.Email, [+response.data.Id]);
     await response.item.shareWith(request.PACRequestTo.LoginName, SharingRole.View);
@@ -86,9 +99,7 @@ export class PacRequestListService {
   private getSharepointDate(date: Date, time: string) {
     const splitTime = time.split(':');
     date.setHours(+splitTime[0], +splitTime[1]);
-    const spDate: string = date.getFullYear() +
-      '-' + (date.getMonth() + 1) + '-' + date.getDay() + 'T' + date.getHours() + ':' + date.getMinutes() + ':00.000Z';
-    return spDate;
+    return date.toISOString();
   }
 }
 

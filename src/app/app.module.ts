@@ -29,6 +29,7 @@ import { UserViewService } from './user-view/user-view.service';
 import { CalendarService } from './calendar/calendar.service';
 import { LoaderComponent } from './loader/loader.component';
 import { LoaderService } from './loader/loader.service';
+import { RequestViewService } from './request-view/request-view.service';
 
 const userViewState = { name: 'user-view', component: UserViewComponent };
 const adminViewState = { name: 'admin-view', component: AdminViewComponent };
@@ -79,6 +80,7 @@ const adminRequestsState = { name: 'request-response', component: RequestRespons
     AdminViewService,
     UserViewService,
     CalendarService,
+    RequestViewService,
   ],
   entryComponents: [
     AppComponent,

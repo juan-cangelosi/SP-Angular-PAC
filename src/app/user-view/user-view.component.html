@@ -54,11 +54,11 @@
     <ng-container matColumnDef="expandedDetail">
       <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
         <div class="example-element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
-          <app-request-view>
 
-          </app-request-view>
-          <div class="example-element-description">
+          <div class="border-info">
+            <app-request-view [request]="element">
 
+            </app-request-view>
           </div>
         </div>
       </td>
@@ -66,7 +66,7 @@
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let element; columns: displayedColumns;" class="example-element-row" [class.example-expanded-row]="expandedElement === element"
-      (click)="expandedElement = element">
+      (click)="expandedElement !== element? expandedElement = element: expandedElement = null ">
     </tr>
     <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
   </table>

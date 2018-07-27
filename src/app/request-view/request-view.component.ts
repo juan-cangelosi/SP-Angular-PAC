@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { PACRequest } from '../models/PACRequest';
+import { RequestViewService } from './request-view.service';
+import { User } from '../models/User';
 
 @Component({
   selector: 'app-request-view',
@@ -7,9 +10,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RequestViewComponent implements OnInit {
 
-  constructor() { }
+  @Input('request') public request: PACRequest;
+
+  public author: User;
+
+  constructor(public requestViewService: RequestViewService) {
+    this.author = new User();
+  }
 
   ngOnInit() {
+    this.requestViewService.getUser(this.request.AuthorId).then((user) => {
+      this.author = user;
+    });
+    console.log(this.request);
   }
 
 }

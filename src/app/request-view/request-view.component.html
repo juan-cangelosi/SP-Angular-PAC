@@ -1,52 +1,46 @@
 <table class="mat-table">
   <tbody>
-    <tr class="mat-header-row ng-star-inserted">
-      <th class="mat-header-cell   ng-star-inserted" role="columnheader"> Requester </th>
-      <th class="mat-header-cell   ng-star-inserted" role="columnheader"> Email </th>
+    <tr class="mat-header-row ">
+      <th class="mat-header-cell" role="columnheader"> Requester </th>
+      <th class="mat-header-cell   " role="columnheader"> Email </th>
     </tr>
-    <tr class="mat-header-row ng-star-inserted">
-      <td class="mat-cell cdk-column-fechaInicio mat-column-fechaInicio ng-tns-c5-15 ng-star-inserted" role="gridcell"> Requester </td>
-      <td class="mat-cell cdk-column-fechaInicio mat-column-fechaInicio ng-tns-c5-15 ng-star-inserted" role="gridcell"> Email </td>
+    <tr class="mat-header-row ">
+      <td class="mat-cell cdk-column-fechaInicio mat-column-fechaInicio ng-tns-c5-15 " role="gridcell"> {{author.Name}} </td>
+      <td class="mat-cell cdk-column-fechaInicio mat-column-fechaInicio ng-tns-c5-15 " role="gridcell"> {{author.Email}} </td>
     </tr>
-    <tr class="mat-header-row ng-star-inserted">
-      <th class="mat-header-cell   ng-star-inserted" role="columnheader"> Start Day </th>
-      <th class="mat-header-cell   ng-star-inserted" role="columnheader"> Start Hour </th>
+    <tr class="mat-header-row ">
+      <th class="mat-header-cell" role="columnheader"> Start Day </th>
+      <th class="mat-header-cell" role="columnheader"> Start Hour </th>
     </tr>
-    <tr class="mat-header-row ng-star-inserted">
-      <td class="mat-cell cdk-column-fechaInicio mat-column-fechaInicio ng-tns-c5-15 ng-star-inserted" role="gridcell"> Requester </td>
-      <td class="mat-cell cdk-column-fechaInicio mat-column-fechaInicio ng-tns-c5-15 ng-star-inserted" role="gridcell"> Email </td>
+    <tr class="mat-header-row ">
+      <td class="mat-cell cdk-column-fechaInicio mat-column-fechaInicio ng-tns-c5-15 " role="gridcell"> {{request.PACDateFrom | date}} </td>
+      <td class="mat-cell cdk-column-fechaInicio mat-column-fechaInicio ng-tns-c5-15 " role="gridcell"> {{request.PACHourFrom}} </td>
     </tr>
-    <tr class="mat-header-row ng-star-inserted">
-      <th class="mat-header-cell   ng-star-inserted" role="columnheader"> Finish Day </th>
-      <th class="mat-header-cell   ng-star-inserted" role="columnheader"> Finish Hour </th>
+    <tr class="mat-header-row ">
+      <th class="mat-header-cell" role="columnheader"> Finish Day </th>
+      <th class="mat-header-cell" role="columnheader"> Finish Hour </th>
     </tr>
-    <tr class="mat-header-row ng-star-inserted">
-      <td class="mat-cell cdk-column-fechaInicio mat-column-fechaInicio ng-tns-c5-15 ng-star-inserted" role="gridcell"> Requester </td>
-      <td class="mat-cell cdk-column-fechaInicio mat-column-fechaInicio ng-tns-c5-15 ng-star-inserted" role="gridcell"> Email </td>
+    <tr class="mat-header-row ">
+      <td class="mat-cell cdk-column-fechaInicio mat-column-fechaInicio ng-tns-c5-15 " role="gridcell"> {{request.PACDateTo | date}} </td>
+      <td class="mat-cell cdk-column-fechaInicio mat-column-fechaInicio ng-tns-c5-15 " role="gridcell"> {{request.PACHourTo}} </td>
     </tr>
   </tbody>
 </table>
 <table class="mat-table">
   <tbody>
-    <tr class="mat-header-row ng-star-inserted">
-      <th class="mat-header-cell   ng-star-inserted" role="columnheader"> Reason </th>
+    <tr class="mat-header-row">
+      <th class="mat-header-cell   " role="columnheader"> Reason </th>
     </tr>
-    <tr class="mat-header-row ng-star-inserted">
+    <tr class="mat-header-row ">
       <td class="mat-cell" role="gridcell">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec quis luctus orci. Ut elementum luctus nulla in ornare. Lorem
-        ipsum dolor sit amet, consectetur adipiscing elit. Maecenas eget luctus tellus. Morbi condimentum dui urna, ut iaculis
-        mauris cursus lobortis. Donec porttitor accumsan condimentum. Nam nibh justo, faucibus ultrices sem ut, rutrum placerat
-        libero. Integer enim ante, laoreet in ullamcorper eget, ultricies vulputate nibh. Sed consequat nibh eleifend quam
-        vulputate, id viverra purus auctor. Cras sodales sollicitudin odio at dapibus. Nullam sit amet dui lorem. Curabitur
-        ex felis, porta nec diam vel, gravida maximus ipsum. Mauris vitae luctus erat. Class aptent taciti sociosqu ad litora
-        torquent per conubia nostra, per inceptos himenaeos. In bibendum maximus arcu non bibendum.
+        {{request.PACRequestType}}: {{request.PACReason}}
       </td>
     </tr>
-    <tr class="mat-header-row ng-star-inserted">
-      <th class="mat-header-cell   ng-star-inserted" role="columnheader"> Attachments </th>
+    <tr class="mat-header-row">
+      <th class="mat-header-cell   " role="columnheader"> Attachments </th>
     </tr>
-    <tr class="mat-header-row ng-star-inserted">
-      <td class="mat-cell cdk-column-fechaInicio mat-column-fechaInicio ng-tns-c5-15 ng-star-inserted" role="gridcell"> File 1 </td>>
+    <tr class="mat-header-row"  *ngFor="let attachment of request.Attachments">
+      <td class="mat-cell" role="gridcell" > {{attachment.fileName}} </td>
     </tr>
   </tbody>
 </table>
