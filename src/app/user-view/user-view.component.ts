@@ -47,4 +47,12 @@ export class UserViewComponent implements OnInit {
     this.uiRouter.stateService.go('new-request');
   }
 
+  public clickedRow(element: PACRequest) {
+    this.expandedElement !== element ? this.expandedElement = element : this.expandedElement = null;
+    if (element.PACRequestStatus === 'Needs Corrections') {
+      this.userViewService.SelectedRequest = element;
+      this.uiRouter.stateService.go('new-request');
+    }
+  }
+
 }

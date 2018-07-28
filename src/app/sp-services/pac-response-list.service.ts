@@ -42,7 +42,5 @@ export class PacResponseListService {
     const response = await sp.web.lists.getByTitle('PACResponse').items.add(insertObject);
     const user = await this.userListService.getCurrentUser();
     this.pacFolderCreationService.moveItemsToFolder('PACResponse', user.Email, [+response.data.Id]);
-    // request.PACRequest.
-    // await response.item.shareWith(, SharingRole.View);
   }
 }

@@ -1,4 +1,4 @@
-import { User } from 'src/app/models/User';
+import { User } from './User';
 import { Attachment } from './Attachment';
 
 export class PACRequest {

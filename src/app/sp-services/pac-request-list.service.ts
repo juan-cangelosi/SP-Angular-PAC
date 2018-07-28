@@ -26,12 +26,15 @@ export class PacRequestListService {
         const attachment = new Attachment();
         attachment.fileName = attachmentItem.FileName;
         attachment.fileOpenUrl = attachmentItem.ServerRelativeUrl;
+        attachment.savedOnSharepoint = true;
         parsedItem.Attachments.push(attachment);
       }
       parsedItems.push(parsedItem);
     }
     return parsedItems;
   }
+
+
 
   public async getRequestsMadeToUser(): Promise<PACRequest[]> {
     const user = await this.userListService.getCurrentUser();
@@ -83,6 +86,31 @@ export class PacRequestListService {
     const user = await this.userListService.getCurrentUser();
     this.pacFolderCreationService.moveItemsToFolder('PACRequest', user.Email, [+response.data.Id]);
     await response.item.shareWith(request.PACRequestTo.LoginName, SharingRole.View);
+  }
+
+  public async editRequest(request: PACRequest) {
+    const insertObject = {
+      PACRequestToId: request.PACRequestTo.Id,
+      PACDateFrom: this.getSharepointDate(request.PACDateFrom, request.PACHourFrom),
+      PACDateTo: this.getSharepointDate(request.PACDateTo, request.PACHourTo),
+      PACRequestStatus: 'Pending',
+      PACReason: request.PACReason,
+      PACRequestType: request.PACRequestType
+    };
+    console.log(insertObject);
+    const response = await sp.web.lists.getByTitle('PACRequest').items.getById(request.Id).update(
+      insertObject, '*'
+    );
+    const fileInfos: AttachmentFileInfo[] = [];
+    for (const attachment of request.Attachments) {
+      fileInfos.push({ name: attachment.fileName, content: attachment.file });
+    }
+    response.item.attachmentFiles.addMultiple(fileInfos);
+    await response.item.shareWith(request.PACRequestTo.LoginName, SharingRole.View);
+  }
+
+  public async removeAttachment(requestId: number, attachment: Attachment) {
+    await sp.web.lists.getByTitle('PACRequest').items.getById(requestId).attachmentFiles.getByName(attachment.fileName).delete();
   }
 
   public async getTypeOfRequests(): Promise<string[]> {

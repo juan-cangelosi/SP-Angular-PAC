@@ -3,11 +3,14 @@ import { PacRequestListService } from '../sp-services/pac-request-list.service';
 import { PACRequest } from '../models/PACRequest';
 import { User } from '../models/User';
 import { UserListService } from '../sp-services/user-list.service';
+import { Attachment } from '../models/Attachment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserViewService {
+
+  private selectedRequest: PACRequest;
 
   constructor(private pacRequestList: PacRequestListService, private userListService: UserListService) { }
 
@@ -28,5 +31,23 @@ export class UserViewService {
 
   public async addRequest(request: PACRequest) {
     await this.pacRequestList.addRequest(request);
+  }
+
+  public async updateRequest(request: PACRequest) {
+    await this.pacRequestList.editRequest(request);
+  }
+
+  public async removeAttachment(requestId: number, attachment: Attachment) {
+    await this.pacRequestList.removeAttachment(requestId, attachment);
+  }
+
+  public get SelectedRequest(): PACRequest {
+    const request = this.selectedRequest;
+    this.selectedRequest = null;
+    return request;
+  }
+
+  public set SelectedRequest(request: PACRequest) {
+    this.selectedRequest = request;
   }
 }

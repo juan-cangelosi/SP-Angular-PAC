@@ -30,12 +30,16 @@ import { CalendarService } from './calendar/calendar.service';
 import { LoaderComponent } from './loader/loader.component';
 import { LoaderService } from './loader/loader.service';
 import { RequestViewService } from './request-view/request-view.service';
+import { HumanResourcesComponent } from './human-resources/human-resources.component';
+import { HumanResourcesService } from './human-resources/human-resources.service';
 
 const userViewState = { name: 'user-view', component: UserViewComponent };
 const adminViewState = { name: 'admin-view', component: AdminViewComponent };
 const newRequestState = { name: 'new-request', component: NewRequestComponent };
 const calendarState = { name: 'calendar', component: CalendarComponent };
 const adminRequestsState = { name: 'request-response', component: RequestResponseComponent };
+const hrState = { name: 'human-resources', component: RequestResponseComponent };
+const hrViewState = { name: 'human-resources-view', component: RequestResponseComponent };
 
 @NgModule({
   declarations: [
@@ -48,6 +52,7 @@ const adminRequestsState = { name: 'request-response', component: RequestRespons
     RequestViewComponent,
     RequestResponseComponent,
     LoaderComponent,
+    HumanResourcesComponent
   ],
   imports: [
     BrowserModule,
@@ -58,6 +63,8 @@ const adminRequestsState = { name: 'request-response', component: RequestRespons
         newRequestState,
         calendarState,
         adminRequestsState,
+        hrState,
+        hrViewState
       ], useHash: true
     }),
     FormsModule,
@@ -81,6 +88,7 @@ const adminRequestsState = { name: 'request-response', component: RequestRespons
     UserViewService,
     CalendarService,
     RequestViewService,
+    HumanResourcesService,
   ],
   entryComponents: [
     AppComponent,

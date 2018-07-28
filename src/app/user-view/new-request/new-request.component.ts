@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { User } from '../../models/User';
 import { UserViewService } from '../user-view.service';
-import { PACRequest } from 'src/app/models/PACRequest';
+import { PACRequest } from '../../models/PACRequest';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { Attachment } from '../../models/Attachment';
 import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
@@ -33,7 +33,13 @@ export class NewRequestComponent implements OnInit {
         startWith(''),
         map(manager => manager ? this._filterManagers(manager) : this.managers.slice())
       );
-    this.request = new PACRequest();
+    const selectedRequest = this.userViewService.SelectedRequest;
+
+    if (selectedRequest) {
+      this.request = selectedRequest;
+    } else {
+      this.request = new PACRequest();
+    }
   }
 
   ngOnInit() {
@@ -53,7 +59,11 @@ export class NewRequestComponent implements OnInit {
   }
 
   public sendRequest() {
-    this.userViewService.addRequest(this.request);
+    if (this.request.Id) {
+
+    } else {
+      this.userViewService.addRequest(this.request);
+    }
   }
 
   displayFn(user?: User): string | undefined {
@@ -70,11 +80,11 @@ export class NewRequestComponent implements OnInit {
     }
   }
 
-  public removeAttachment(index: number) {
-    console.log(index);
-    console.log(this.request.Attachments);
+  public async removeAttachment(index: number) {
+    if (this.request.Attachments[index].savedOnSharepoint) {
+      this.userViewService.removeAttachment(this.request.Id, this.request.Attachments[index]);
+    }
     this.request.Attachments.splice(index, 1);
-    console.log(this.request.Attachments);
   }
 
   public selected(manager: User) {

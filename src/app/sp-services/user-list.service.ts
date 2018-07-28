@@ -17,7 +17,7 @@ export class UserListService {
     return user;
   }
 
-  public async isUserManager(id): Promise<boolean> {
+  public async isUserManager(id: number): Promise<boolean> {
     let isManager = true;
     const userExistingInGroup = await sp.web.siteGroups.getByName('PACManager').users.getById(id).get();
     if (!userExistingInGroup) {
@@ -26,9 +26,9 @@ export class UserListService {
     return isManager;
   }
 
-  public async isUserHR(id): Promise<boolean> {
+  public async isUserHR(id: number): Promise<boolean> {
     let isManager = true;
-    const userExistingInGroup = await sp.web.siteGroups.getByName('HumanResources').users.getById(id).get();
+    const userExistingInGroup = await sp.web.siteGroups.getByName('HHRR').users.getById(id).get();
     if (!userExistingInGroup) {
       isManager = false;
     }

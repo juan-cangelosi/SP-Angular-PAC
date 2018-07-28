@@ -22,10 +22,10 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
     this.isManager = true;
     this.userListService.getCurrentUser().then((user) => {
-      this.userListService.isUserManager((manager) => {
+      this.userListService.isUserManager(user.Id).then((manager) => {
         this.isManager = manager;
       });
-      this.userListService.isUserHR((hr) => {
+      this.userListService.isUserHR(user.Id).then((hr) => {
         this.isRRHH = hr;
       });
     });
