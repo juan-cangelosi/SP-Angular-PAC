@@ -32,14 +32,15 @@ import { LoaderService } from './loader/loader.service';
 import { RequestViewService } from './request-view/request-view.service';
 import { HumanResourcesComponent } from './human-resources/human-resources.component';
 import { HumanResourcesService } from './human-resources/human-resources.service';
+import { FinalReportViewComponent } from './human-resources/final-report-view/final-report-view.component';
 
 const userViewState = { name: 'user-view', component: UserViewComponent };
 const adminViewState = { name: 'admin-view', component: AdminViewComponent };
 const newRequestState = { name: 'new-request', component: NewRequestComponent };
 const calendarState = { name: 'calendar', component: CalendarComponent };
 const adminRequestsState = { name: 'request-response', component: RequestResponseComponent };
-const hrState = { name: 'human-resources', component: RequestResponseComponent };
-const hrViewState = { name: 'human-resources-view', component: RequestResponseComponent };
+const hrState = { name: 'human-resources', component: HumanResourcesComponent };
+const hrViewState = { name: 'final-request-view', component: FinalReportViewComponent };
 
 @NgModule({
   declarations: [
