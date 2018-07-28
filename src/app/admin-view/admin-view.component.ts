@@ -2,31 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSort, MatTableDataSource } from '@angular/material';
 import { UIRouter } from '@uirouter/core';
 import { AdminViewService } from './admin-view.service';
-
-export interface PACRequest {
-  id: string;
-  fechaCreacion: Date;
-  fechaInicio: Date;
-  horaInicio: string;
-  fechaFin: Date;
-  horaFin: string;
-  estado: string;
-}
-
-const ELEMENT_DATA: PACRequest[] = [
-  {
-    id: '1', fechaCreacion: new Date(1995, 5, 5), fechaInicio: new Date(),
-    horaInicio: '13:34', fechaFin: new Date(), horaFin: '17:34', estado: 'Pending'
-  },
-  {
-    id: '2', fechaCreacion: new Date(2015, 3, 3), fechaInicio: new Date(),
-    horaInicio: '15:34', fechaFin: new Date(), horaFin: '18:34', estado: 'Approved'
-  },
-  {
-    id: '3', fechaCreacion: new Date(2000, 1, 1), fechaInicio: new Date(),
-    horaInicio: '15:34', fechaFin: new Date(), horaFin: '18:34', estado: 'Denied'
-  }
-];
+import { BehaviorSubject } from 'rxjs';
+import { PACRequest } from '../models/PACRequest';
 
 @Component({
   selector: 'app-admin-view',
@@ -35,24 +12,32 @@ const ELEMENT_DATA: PACRequest[] = [
 })
 export class AdminViewComponent implements OnInit {
 
-  displayedColumns: string[] = ['id', 'fechaCreacion', 'fechaInicio', 'horaInicio', 'fechaFin', 'horaFin'];
-  dataSource = new MatTableDataSource(ELEMENT_DATA);
-  expandedElement: any;
+  public displayedColumns: string[] = ['id', /* 'fechaCreacion',*/ 'fechaInicio', 'horaInicio', 'fechaFin', 'horaFin', /* 'estado' */];
+  public dataSource: BehaviorSubject<PACRequest[]>;
+
+  public expandedElement;
+
+  public requests: PACRequest[];
 
 
-  public resultsLength = ELEMENT_DATA.length;
+  public resultsLength;
 
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(public uiRouter: UIRouter, public adminViewService: AdminViewService) {
-
+    this.dataSource =  new BehaviorSubject(this.requests);
   }
 
   ngOnInit() {
-    this.dataSource.sort = this.sort;
+    this.adminViewService.getRequestsMadeToUser().then((requests) => {
+      this.requests = requests;
+      this.dataSource.next(this.requests);
+      this.resultsLength = this.requests.length;
+    });
   }
 
-  public goToRequestResponse() {
+  public goToRequestResponse(request: PACRequest) {
+    this.adminViewService.SelectedRequest = request;
     this.uiRouter.stateService.go('request-response');
   }
 

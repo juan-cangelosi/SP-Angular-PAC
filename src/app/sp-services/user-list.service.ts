@@ -26,6 +26,15 @@ export class UserListService {
     return isManager;
   }
 
+  public async isUserHR(id): Promise<boolean> {
+    let isManager = true;
+    const userExistingInGroup = await sp.web.siteGroups.getByName('HumanResources').users.getById(id).get();
+    if (!userExistingInGroup) {
+      isManager = false;
+    }
+    return isManager;
+  }
+
   public async getManagers(): Promise<User[]> {
     const managers: User[] = new Array<User>();
     const web = sp.web;

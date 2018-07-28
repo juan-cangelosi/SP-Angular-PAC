@@ -33,9 +33,10 @@ export class PacRequestListService {
     return parsedItems;
   }
 
-  public async getUserRequests(): Promise<PACRequest[]> {
+  public async getRequestsMadeToUser(): Promise<PACRequest[]> {
     const user = await this.userListService.getCurrentUser();
-    const items = await sp.web.lists.getByTitle('PACRequest').items.filter(`RequestToId eq '${user.Id}'`).get();
+    const items = await sp.web.lists.getByTitle('PACRequest').items
+      .filter(`PACRequestToId eq '${user.Id}' and PACRequestStatus eq 'Pending'`).get();
     const parsedItems: PACRequest[] = new Array<PACRequest>();
     console.log(items);
     for (const item of items) {
@@ -45,7 +46,8 @@ export class PacRequestListService {
       for (const attachmentItem of attachments) {
         console.log(attachmentItem);
         const attachment = new Attachment();
-        attachment.fileName = attachmentItem.fileName;
+        attachment.fileName = attachmentItem.FileName;
+        attachment.fileOpenUrl = attachmentItem.ServerRelativeUrl;
         parsedItem.Attachments.push(attachment);
       }
       parsedItems.push(parsedItem);
@@ -75,7 +77,7 @@ export class PacRequestListService {
     const response = await sp.web.lists.getByTitle('PACRequest').items.add(insertObject);
     const fileInfos: AttachmentFileInfo[] = [];
     for (const attachment of request.Attachments) {
-      fileInfos.push({name: attachment.fileName, content: attachment.file});
+      fileInfos.push({ name: attachment.fileName, content: attachment.file });
     }
     response.item.attachmentFiles.addMultiple(fileInfos);
     const user = await this.userListService.getCurrentUser();

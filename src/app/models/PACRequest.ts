@@ -12,6 +12,7 @@ export class PACRequest {
   PACDateTo: Date;
   PACHourTo: string;
   PACRequestStatus: string;
+  PACResponse: string;
   PACReason: any;
   PACRequestType = '';
   ContentType: any = '';
