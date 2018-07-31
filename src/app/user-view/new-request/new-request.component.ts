@@ -8,6 +8,7 @@ import { PACRequest } from '../../models/PACRequest';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { Attachment } from '../../models/Attachment';
 import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
+import { UIRouter } from '../../../../node_modules/@uirouter/core';
 
 @Component({
   selector: 'app-new-request',
@@ -27,7 +28,7 @@ export class NewRequestComponent implements OnInit {
   @ViewChild('imgFileInput') imgFileInput;
 
 
-  constructor(private userViewService: UserViewService, private _sanitizer: DomSanitizer) {
+  constructor(private userViewService: UserViewService, private _sanitizer: DomSanitizer, public uiRouter: UIRouter) {
     this.filteredRequests = this.requestToCtrl.valueChanges
       .pipe(
         startWith(''),
@@ -63,6 +64,7 @@ export class NewRequestComponent implements OnInit {
 
     } else {
       this.userViewService.addRequest(this.request);
+      this.uiRouter.stateService.go('user-view');
     }
   }
 

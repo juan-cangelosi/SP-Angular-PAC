@@ -9,9 +9,10 @@
         </mat-card-title>
         <form class="flex-col">
             <mat-form-field class="example-full-width">
-                <textarea name="PACReason" matInput placeholder="Reason" [(ngModel)]="response.PACResponseReason"></textarea>
+                <textarea name="PACReason" matInput placeholder="Reason" [(ngModel)]="response.PACResponseReason" required></textarea>
             </mat-form-field>
             <div class="btn-group">
+                <button mat-raised-button (click)="sendBack()">Send back</button>
                 <button mat-raised-button color="primary" (click)="approve()">Approve</button>
                 <button mat-raised-button color="warn" (click)="deny()">Deny</button>
             </div>

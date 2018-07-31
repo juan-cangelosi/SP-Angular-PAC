@@ -1,3 +1,16 @@
-<p>
-  final-report-view works!
-</p>
+<app-request-view [request]="request">
+</app-request-view>
+<table class="mat-table">
+  <tbody>
+    <tr class="mat-header-row ">
+      <th class="mat-header-cell" role="columnheader"> Response </th>
+    </tr>
+    <tr class="mat-header-row ">
+      <td class="mat-cell cdk-column-fechaInicio mat-column-fechaInicio ng-tns-c5-15 " role="gridcell"> {{request.PACHRResponse}} </td>
+    </tr>
+  </tbody>
+</table>
+<div class="btn-group">
+  <button mat-raised-button color="primary" (click)="approve()">Approve</button>
+  <button mat-raised-button color="warn" (click)="deny()">Deny</button>
+</div>

@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { PACRequest } from '../models/PACRequest';
 import { RequestViewService } from './request-view.service';
 import { User } from '../models/User';
+import { Attachment } from '../models/Attachment';
 
 @Component({
   selector: 'app-request-view',
@@ -23,6 +24,10 @@ export class RequestViewComponent implements OnInit {
       this.author = user;
     });
     console.log(this.request);
+  }
+
+  public openAttachment(attachment: Attachment) {
+    window.open(attachment.fileOpenUrl);
   }
 
 }

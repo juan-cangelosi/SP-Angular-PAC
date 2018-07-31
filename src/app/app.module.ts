@@ -53,7 +53,8 @@ const hrViewState = { name: 'final-request-view', component: FinalReportViewComp
     RequestViewComponent,
     RequestResponseComponent,
     LoaderComponent,
-    HumanResourcesComponent
+    HumanResourcesComponent,
+    FinalReportViewComponent,
   ],
   imports: [
     BrowserModule,

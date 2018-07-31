@@ -39,6 +39,10 @@ export class HeaderComponent implements OnInit {
     this.router.stateService.go('admin-view');
   }
 
+  public viewHRRequests() {
+    this.router.stateService.go('human-resources');
+  }
+
   // public viewCalendar() {
   //  this.router.stateService.go('calendar');
   // }

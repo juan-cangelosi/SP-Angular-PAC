@@ -42,6 +42,7 @@ export class PACRequest {
     }
     if (jsonObj['PACRequestStatus'] != null) { this.PACRequestStatus = jsonObj['PACRequestStatus']; }
     if (jsonObj['PACReason'] != null) { this.PACReason = jsonObj['PACReason']; }
+    if (jsonObj['PACResponse'] != null) { this.PACReason = jsonObj['PACResponse']; }
     if (jsonObj['AuthorId'] != null) { this.AuthorId = jsonObj['AuthorId']; }
     if (jsonObj['PACRequestType'] != null) { this.PACRequestType = jsonObj['PACRequestType']; }
     if (jsonObj['ContentType'] != null) { this.ContentType = jsonObj['ContentType']; }

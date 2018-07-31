@@ -33,6 +33,11 @@ export class RequestResponseComponent implements OnInit {
     this.sendRequest();
   }
 
+  public sendBack() {
+    this.response.PACResponse = 'Send Back';
+    this.sendRequest();
+  }
+
   private sendRequest() {
     this.adminViewService.sendResponseToRequest(this.response);
     this.uiRouter.stateService.go('admin-view');

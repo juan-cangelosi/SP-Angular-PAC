@@ -40,7 +40,19 @@
       <th class="mat-header-cell   " role="columnheader"> Attachments </th>
     </tr>
     <tr class="mat-header-row"  *ngFor="let attachment of request.Attachments">
-      <td class="mat-cell" role="gridcell" > {{attachment.fileName}} </td>
+      <td class="mat-cell" role="gridcell" >   <a (click)="openAttachment(attachment)">{{attachment.fileName}}  </a></td>
+    </tr>
+  </tbody>
+</table>
+<table class="mat-table" *ngIf="request.PACRequestStatus !== 'Pending'">
+  <tbody>
+    <tr class="mat-header-row">
+      <th class="mat-header-cell   " role="columnheader"> Status </th>
+    </tr>
+    <tr class="mat-header-row ">
+      <td class="mat-cell" role="gridcell">
+        {{request.PACRequestStatus}}: {{request.PACResponse}}
+      </td>
     </tr>
   </tbody>
 </table>

@@ -2,6 +2,7 @@ import { PACRequest } from './PACRequest';
 
 export class PACRequestFinal extends PACRequest {
 
+    PACHRResponse: string;
 
     constructor() {
         super();

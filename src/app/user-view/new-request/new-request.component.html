@@ -11,25 +11,25 @@
 
     <div class="flex-row">
       <mat-form-field class="col-6">
-        <input name="pacDateFrom" matInput [matDatepicker]="pickerStart" [(ngModel)]="request.PACDateFrom" placeholder="Start Date">
+        <input name="pacDateFrom" matInput [matDatepicker]="pickerStart" [(ngModel)]="request.PACDateFrom" placeholder="Start Date" required>
         <mat-datepicker-toggle matSuffix [for]="pickerStart"></mat-datepicker-toggle>
         <mat-datepicker #pickerStart></mat-datepicker>
       </mat-form-field>
 
       <mat-form-field class="col-6">
-        <input name="pacHourFrom" matInput placeholder="Start Hour"  [(ngModel)]="request.PACHourFrom">
+        <input name="pacHourFrom" matInput placeholder="Start Hour"  [(ngModel)]="request.PACHourFrom" required>
       </mat-form-field>
     </div>
 
     <div class="flex-row">
       <mat-form-field class="col-6">
-        <input name="pacDateFrom" matInput [matDatepicker]="pickerFinish" [(ngModel)]="request.PACDateTo" placeholder="Finish Date">
+        <input name="pacDateFrom" matInput [matDatepicker]="pickerFinish" [(ngModel)]="request.PACDateTo" placeholder="Finish Date" required>
         <mat-datepicker-toggle matSuffix [for]="pickerFinish"></mat-datepicker-toggle>
         <mat-datepicker #pickerFinish></mat-datepicker>
       </mat-form-field>
 
       <mat-form-field class="col-6">
-        <input name="pacHourFrom" matInput placeholder="Finish Hour " [(ngModel)]="request.PACHourTo">
+        <input name="pacHourFrom" matInput placeholder="Finish Hour " [(ngModel)]="request.PACHourTo" required>
       </mat-form-field>
     </div>
 
@@ -40,7 +40,7 @@
 
 
     <mat-form-field class="flex-row">
-      <input name="pacsendTo" matInput placeholder="Send Request To" aria-label="Manager" [matAutocomplete]="auto" [formControl]="requestToCtrl" >
+      <input name="pacsendTo" matInput placeholder="Send Request To" aria-label="Manager" [matAutocomplete]="auto" [formControl]="requestToCtrl" required >
       <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn" (optionSelected)="optionSelected($event)">
         <mat-option *ngFor="let manager of managers" [value]="manager" (onSelect)="selected(manager)">
           {{manager.Name}}

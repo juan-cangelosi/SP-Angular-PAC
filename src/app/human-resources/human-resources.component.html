@@ -1,3 +1,51 @@
-<p>
-  human-resources works!
-</p>
+<table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+
+  <!-- ID Column -->
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Id. </th>
+    <td mat-cell *matCellDef="let element">{{element.id}}</td>
+  </ng-container>
+
+  <!-- Creation Date Column 
+    
+  <ng-container matColumnDef="fechaCreacion">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Creation Date </th>
+    <td mat-cell *matCellDef="let element">{{element.PACDateFrom | date }}</td>
+  </ng-container> 
+-->
+
+  <!-- Start Date Column -->
+  <ng-container matColumnDef="fechaInicio">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Start Date </th>
+    <td mat-cell *matCellDef="let element">{{element.PACDateFrom | date}}</td>
+  </ng-container>
+
+  <!-- Start Date Column -->
+  <ng-container matColumnDef="horaInicio">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Start Hour </th>
+    <td mat-cell *matCellDef="let element">{{element.PACHourFrom}}</td>
+  </ng-container>
+
+  <!-- Finish Date Column -->
+  <ng-container matColumnDef="fechaFin">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Finish Date </th>
+    <td mat-cell *matCellDef="let element">{{element.PACDateTo | date}}</td>
+  </ng-container>
+
+  <!-- Finish Date Column -->
+  <ng-container matColumnDef="horaFin">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Finish Hour </th>
+    <td mat-cell *matCellDef="let element">{{element.PACHourTo}}</td>
+  </ng-container>
+
+  <!-- Finish Date Column 
+  <ng-container matColumnDef="estado">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+    <td mat-cell *matCellDef="let element">{{element.PACRequestStatus}}</td>
+  </ng-container>
+  -->
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="viewFinalRequest(row)"></tr>
+</table>
+<mat-paginator [length]="resultsLength" [pageSize]="20"></mat-paginator>
