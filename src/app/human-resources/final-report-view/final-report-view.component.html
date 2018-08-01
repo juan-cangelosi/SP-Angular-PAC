@@ -10,7 +10,12 @@
     </tr>
   </tbody>
 </table>
-<div class="btn-group">
-  <button mat-raised-button color="primary" (click)="approve()">Approve</button>
-  <button mat-raised-button color="warn" (click)="deny()">Deny</button>
-</div>
+<form class="flex-col">
+  <mat-form-field class="example-full-width">
+    <textarea name="PACReason" matInput placeholder="Reason" [(ngModel)]="request.PACHRResponse" required></textarea>
+  </mat-form-field>
+  <div class="btn-group">
+    <button mat-raised-button color="primary" (click)="approve()">Approve</button>
+    <button mat-raised-button color="warn" (click)="deny()">Deny</button>
+  </div>
+</form>

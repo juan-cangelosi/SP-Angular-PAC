@@ -35,4 +35,8 @@ export class HumanResourcesService {
   public set SelectedRequest(request: PACRequestFinal) {
     this.selectedRequest = request;
   }
+
+  public async updateRequest(request: PACRequestFinal) {
+    await this.pacRequestFinalListService.updateFinalPACRequest(request);
+  }
 }

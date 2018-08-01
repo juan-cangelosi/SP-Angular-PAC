@@ -24,6 +24,10 @@ export class PACRequest {
 
   constructor() {
     this.Attachments = new Array<Attachment>();
+    this.PACDateFrom = new Date();
+    this.PACDateTo = new Date();
+    this.PACHourFrom = '8:00';
+    this.PACHourTo = '18:00';
   }
 
   PrepareDTO(jsonObj: any): void {
@@ -42,7 +46,7 @@ export class PACRequest {
     }
     if (jsonObj['PACRequestStatus'] != null) { this.PACRequestStatus = jsonObj['PACRequestStatus']; }
     if (jsonObj['PACReason'] != null) { this.PACReason = jsonObj['PACReason']; }
-    if (jsonObj['PACResponse'] != null) { this.PACReason = jsonObj['PACResponse']; }
+    if (jsonObj['PACResponse'] != null) { this.PACResponse = jsonObj['PACResponse']; }
     if (jsonObj['AuthorId'] != null) { this.AuthorId = jsonObj['AuthorId']; }
     if (jsonObj['PACRequestType'] != null) { this.PACRequestType = jsonObj['PACRequestType']; }
     if (jsonObj['ContentType'] != null) { this.ContentType = jsonObj['ContentType']; }

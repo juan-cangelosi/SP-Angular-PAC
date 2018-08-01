@@ -48,4 +48,3 @@
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="goToRequestResponse(row)"></tr>
 </table>
-<mat-paginator [length]="resultsLength" [pageSize]="20"></mat-paginator>

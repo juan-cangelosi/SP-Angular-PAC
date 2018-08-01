@@ -59,13 +59,13 @@ export class NewRequestComponent implements OnInit {
     return this.managers.filter(manager => manager.LoginName.toLowerCase().indexOf(filterValue) === 0);
   }
 
-  public sendRequest() {
+  public async sendRequest() {
     if (this.request.Id) {
-
+      await this.userViewService.updateRequest(this.request);
     } else {
-      this.userViewService.addRequest(this.request);
-      this.uiRouter.stateService.go('user-view');
+      await this.userViewService.addRequest(this.request);
     }
+    this.uiRouter.stateService.go('user-view');
   }
 
   displayFn(user?: User): string | undefined {

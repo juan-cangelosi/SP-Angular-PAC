@@ -62,6 +62,9 @@
       </mat-list-item>
     </mat-list>
 
+    <div class="flex-row" *ngIf="request.Id">
+      <p>{{request.PACResponse}}</p>
+    </div>
 
 
     <button mat-raised-button color="primary" (click)="sendRequest()">Send Request</button>

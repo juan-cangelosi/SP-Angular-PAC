@@ -33,6 +33,16 @@ export class PacRequestFinalListService {
     return parsedItems;
   }
 
+  public async updateFinalPACRequest(request: PACRequestFinal) {
+    const insertObject = {
+      PACRequestStatus: request.PACRequestStatus,
+      PACHRResponse: request.PACHRResponse
+    };
+    const response = await sp.web.lists.getByTitle('PACRequestFinal').items.getById(request.Id).update(
+      insertObject, '*'
+    );
+  }
+
   public async getAttachment(itemId: number, fileName: string) {
     const user = await this.userListService.getCurrentUser();
     const blobFile = await sp.web.lists.getByTitle('PACRequestFinal').items.getById(itemId).attachmentFiles.getByName(fileName).get();
