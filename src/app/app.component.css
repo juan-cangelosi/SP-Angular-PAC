@@ -1,0 +1,56 @@
+a {
+    text-decoration: none;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-weight: bold;
+}
+  
+a:hover {
+    text-decoration: underline;
+}
+
+table {
+    width: 100%;
+}
+
+.btn-group {
+    text-align: right;
+}
+
+.flex-col {
+    /* min-width: 150px;
+   max-width: 500px;
+   width: 100%;
+   text-align: center;
+   margin: 0 auto;
+   */
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+  }
+  
+  .flex-row {
+    flex-flow: row wrap;
+  }
+  
+  .col-6 {
+    width: 50%;
+  }
+  
+  .card-container {
+    margin: 5px;
+    text-align: center;
+  }
+  
+  .fill-space {
+    /* This fills the remaining space, by using flexbox. 
+       Every toolbar row uses a flexbox row layout. */
+    flex: 1 1 auto;
+  }
+  
+  .full-width {
+    width: 100%;
+  }
+  
+  
+  
