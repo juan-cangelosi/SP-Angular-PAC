@@ -4,9 +4,10 @@
     left: 0;
     bottom: 56px;
     right: 0;
-    background: rgba(0, 0, 0, 0.15);
-    z-index: 1;
+    background: rgba(0, 0, 0, 0.205);
+    z-index: 10;
     display: flex;
     align-items: center;
     justify-content: center;
+    height: 100%;
   }

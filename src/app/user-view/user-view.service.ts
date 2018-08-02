@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { PacRequestListService } from '../sp-services/pac-request-list.service';
 import { PACRequest } from '../models/PACRequest';
 import { User } from '../models/User';
-import { UserListService } from '../sp-services/user-list.service';
 import { Attachment } from '../models/Attachment';
+import { UserListService } from '../shared/sp-services/user-list.service';
+import { PacRequestListService } from '../shared/sp-services/pac-request-list.service';
 
 @Injectable({
   providedIn: 'root'

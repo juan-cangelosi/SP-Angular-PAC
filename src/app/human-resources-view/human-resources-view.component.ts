@@ -2,15 +2,15 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { PACRequestFinal } from '../models/PACRequestFinal';
 import { MatSort } from '@angular/material';
-import { HumanResourcesService } from './human-resources.service';
-import { UIRouter } from '../../../node_modules/@uirouter/core';
+import { UIRouter } from '@uirouter/core';
+import { HumanResourcesViewService } from './human-resources-view.service';
 
 @Component({
-  selector: 'app-human-resources',
-  templateUrl: './human-resources.component.html',
-  styleUrls: ['./human-resources.component.css']
+  selector: 'app-human-resources-view',
+  templateUrl: './human-resources-view.component.html',
+  styleUrls: ['./human-resources-view.component.css']
 })
-export class HumanResourcesComponent implements OnInit {
+export class HumanResourcesViewComponent implements OnInit {
 
   public displayedColumns: string[] = ['id', /* 'fechaCreacion',*/ 'fechaInicio', 'horaInicio', 'fechaFin', 'horaFin', /* 'estado' */];
   public dataSource: BehaviorSubject<PACRequestFinal[]>;
@@ -21,7 +21,7 @@ export class HumanResourcesComponent implements OnInit {
 
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(public humanResourcesService: HumanResourcesService, public uiRouter: UIRouter) {
+  constructor(public humanResourcesService: HumanResourcesViewService, public uiRouter: UIRouter) {
     this.dataSource =  new BehaviorSubject(this.requests);
   }
 

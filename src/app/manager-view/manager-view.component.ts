@@ -1,19 +1,19 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatSort, MatTableDataSource } from '@angular/material';
+import { MatSort } from '@angular/material';
 import { UIRouter } from '@uirouter/core';
-import { AdminViewService } from './admin-view.service';
 import { BehaviorSubject } from 'rxjs';
 import { PACRequest } from '../models/PACRequest';
+import { ManagerViewService } from './manager-view.service';
 /**
  * Component that represent the manager view of the requests made to him waiting for a response
  * The request will be shown in a list.
  */
 @Component({
-  selector: 'app-admin-view',
-  templateUrl: './admin-view.component.html',
-  styleUrls: ['./admin-view.component.css']
+  selector: 'app-manager-view',
+  templateUrl: './manager-view.component.html',
+  styleUrls: ['./manager-view.component.css']
 })
-export class AdminViewComponent implements OnInit {
+export class ManagerViewComponent implements OnInit {
 
   // Array used to select which columns will be shown in the material list
   public displayedColumns: string[] = ['id', /* 'fechaCreacion',*/ 'fechaInicio', 'horaInicio', 'fechaFin', 'horaFin', /* 'estado' */];
@@ -31,16 +31,16 @@ export class AdminViewComponent implements OnInit {
 
   /**
    * @param uiRouter router used to move between screens
-   * @param adminViewService service used to comunicate between screens of the manager view and to retrieve data from the backend
+   * @param managerViewService service used to comunicate between screens of the manager view and to retrieve data from the backend
    */
-  constructor(private uiRouter: UIRouter, private adminViewService: AdminViewService) {
+  constructor(private uiRouter: UIRouter, private managerViewService: ManagerViewService) {
     // Initialize the datasource with an empty array
     this.dataSource =  new BehaviorSubject(this.requests);
   }
 
   ngOnInit() {
     // Get the request made to the manager and after they are received update the list
-    this.adminViewService.getRequestsMadeToUser().then((requests) => {
+    this.managerViewService.getRequestsMadeToUser().then((requests) => {
       this.requests = requests;
       this.dataSource.next(this.requests);
       this.resultsLength = this.requests.length;
@@ -53,7 +53,7 @@ export class AdminViewComponent implements OnInit {
    * @param request selected request to respond
    */
   public goToRequestResponse(request: PACRequest) {
-    this.adminViewService.SelectedRequest = request;
+    this.managerViewService.SelectedRequest = request;
     this.uiRouter.stateService.go('request-response');
   }
 

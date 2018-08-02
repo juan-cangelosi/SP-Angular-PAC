@@ -5,6 +5,7 @@ import { trigger, state, transition, style, animate } from '@angular/animations'
 import { UserViewService } from './user-view.service';
 import { PACRequest } from '../models/PACRequest';
 import { BehaviorSubject } from 'rxjs';
+import { LoaderService } from '../shared/components/loader/loader.service';
 
 
 @Component({
@@ -39,17 +40,20 @@ export class UserViewComponent implements OnInit {
    *
    * @param uiRouter used to navigate between views
    * @param userViewService used to retrieve the requests and to set the selected request to modify in its internal state
+   * @param loaderService service to show the loader when we load all the requests
    */
-  constructor(private uiRouter: UIRouter, private userViewService: UserViewService) {
+  constructor(private uiRouter: UIRouter, private userViewService: UserViewService, private loaderService: LoaderService) {
     this.requests = new Array<PACRequest>();
     this.dataSource =  new BehaviorSubject(this.requests);
   }
 
   ngOnInit() {
+    this.loaderService.show();
     // Retrieve the userviewService requests and assign them to the variables
     this.userViewService.getRequests().then((requests) => {
       this.requests = requests;
       this.dataSource.next(this.requests);
+      // this.loaderService.hide();
     });
   }
 

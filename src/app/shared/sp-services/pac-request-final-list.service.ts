@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { sp } from '@pnp/sp';
-import { PACRequest } from '../models/PACRequest';
 import { UserListService } from './user-list.service';
-import { Attachment } from '../models/Attachment';
-import { PACRequestFinal } from '../models/PACRequestFinal';
+import { PACRequestFinal } from '../../models/PACRequestFinal';
+import { Attachment } from '../../models/Attachment';
 
 @Injectable({
   providedIn: 'root'

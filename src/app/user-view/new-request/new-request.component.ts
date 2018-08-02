@@ -8,7 +8,7 @@ import { PACRequest } from '../../models/PACRequest';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { Attachment } from '../../models/Attachment';
 import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
-import { UIRouter } from '../../../../node_modules/@uirouter/core';
+import { UIRouter } from '@uirouter/core';
 
 @Component({
   selector: 'app-new-request',

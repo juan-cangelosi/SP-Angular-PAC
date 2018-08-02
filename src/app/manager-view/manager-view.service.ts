@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { PACRequest } from '../models/PACRequest';
-import { PacRequestListService } from '../sp-services/pac-request-list.service';
-import { PacResponseListService } from '../sp-services/pac-response-list.service';
 import { PACResponse } from '../models/PACResponse';
+import { PacRequestListService } from '../shared/sp-services/pac-request-list.service';
+import { PacResponseListService } from '../shared/sp-services/pac-response-list.service';
 
 /**
  * Service used in the manager view to comunicate within screens and with the backend.
@@ -10,7 +10,7 @@ import { PACResponse } from '../models/PACResponse';
 @Injectable({
   providedIn: 'root'
 })
-export class AdminViewService {
+export class ManagerViewService {
 
   // request that was selected in the manager view
   private selectedRequest: PACRequest;

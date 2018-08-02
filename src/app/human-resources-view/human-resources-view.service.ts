@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
-import { UserListService } from '../sp-services/user-list.service';
 import { User } from '../models/User';
 import { PACRequestFinal } from '../models/PACRequestFinal';
-import { PacRequestFinalListService } from '../sp-services/pac-request-final-list.service';
+import { PacRequestFinalListService } from '../shared/sp-services/pac-request-final-list.service';
+import { UserListService } from '../shared/sp-services/user-list.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class HumanResourcesService {
+export class HumanResourcesViewService {
 
   private selectedRequest: PACRequestFinal;
 

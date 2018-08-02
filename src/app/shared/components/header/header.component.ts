@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UIRouter } from '@uirouter/core';
-import { UserListService } from '../sp-services/user-list.service';
+import { UserListService } from '../../sp-services/user-list.service';
 
 /**
  * Component that represents the header of the app, it will contain the toolbar and the to navigate between the views.
@@ -51,7 +51,7 @@ export class HeaderComponent implements OnInit {
    * Method that navigate to the manager view screen
    */
   public viewAdminRequests() {
-    this.router.stateService.go('admin-view');
+    this.router.stateService.go('manager-view');
   }
 
   /**

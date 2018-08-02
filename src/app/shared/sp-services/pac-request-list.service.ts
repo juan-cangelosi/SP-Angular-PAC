@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { sp, SharingRole, AttachmentFileInfo } from '@pnp/sp';
-import { PACRequest } from '../models/PACRequest';
 import { UserListService } from './user-list.service';
 import { PacFolderCreationService } from './pac-folder-creation.service';
-import { Attachment } from '../models/Attachment';
+import { PACRequest } from '../../models/PACRequest';
+import { Attachment } from '../../models/Attachment';
 
 @Injectable({
   providedIn: 'root'

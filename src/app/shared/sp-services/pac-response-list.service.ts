@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { PACResponse } from '../models/PACResponse';
 import { sp, SharingRole } from '@pnp/sp';
 import { UserListService } from './user-list.service';
 import { PacFolderCreationService } from './pac-folder-creation.service';
+import { PACResponse } from '../../models/PACResponse';
 
 @Injectable({
   providedIn: 'root'

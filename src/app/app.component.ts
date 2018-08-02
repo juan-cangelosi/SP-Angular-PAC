@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UIRouter } from '@uirouter/core';
-import { SpService } from './sp-services/sp-service.service';
+import { SpService } from './shared/sp-services/sp-service.service';
 
 @Component({
   selector: 'app-root',
@@ -18,7 +18,7 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.esAdmin = false;
     if (this.esAdmin) {
-      this.uiRouter.stateService.go('admin-view');
+      this.uiRouter.stateService.go('manager-view');
     } else {
       this.uiRouter.stateService.go('user-view');
     }
