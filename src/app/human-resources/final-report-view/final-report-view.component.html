@@ -6,16 +6,16 @@
       <th class="mat-header-cell" role="columnheader"> Response </th>
     </tr>
     <tr class="mat-header-row ">
-      <td class="mat-cell cdk-column-fechaInicio mat-column-fechaInicio ng-tns-c5-15 " role="gridcell"> {{request.PACHRResponse}} </td>
+      <td class="mat-cell cdk-column-fechaInicio mat-column-fechaInicio ng-tns-c5-15 " role="gridcell"> {{request.PACResponse}} </td>
     </tr>
   </tbody>
 </table>
-<form class="flex-col">
+<form class="flex-col" #finalResponse="ngForm" >
   <mat-form-field class="example-full-width">
     <textarea name="PACReason" matInput placeholder="Reason" [(ngModel)]="request.PACHRResponse" required></textarea>
   </mat-form-field>
   <div class="btn-group">
-    <button mat-raised-button color="primary" (click)="approve()">Approve</button>
-    <button mat-raised-button color="warn" (click)="deny()">Deny</button>
+    <button mat-raised-button color="primary" [disabled]="!finalResponse.valid" (click)="approve()">Approve</button>
+    <button mat-raised-button color="warn" [disabled]="!finalResponse.valid" (click)="deny()">Deny</button>
   </div>
 </form>

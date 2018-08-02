@@ -21,32 +21,53 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class UserViewComponent implements OnInit {
 
+  // Columns to display in the angular material table
   public displayedColumns: string[] = ['id', /* 'fechaCreacion',*/ 'fechaInicio', 'horaInicio', 'fechaFin', 'horaFin', 'estado'];
+  // Datasourcec of the angular material table
   public dataSource: BehaviorSubject<PACRequest[]>;
 
-  public expandedElement;
+  // variable used to know which row was clicked to show with more detail that element
+  public expandedElement: PACRequest;
 
+  // variable of the requests retrieved by the service
   public requests: PACRequest[];
 
+  // Angular material table sorter
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(public uiRouter: UIRouter, public userViewService: UserViewService) {
+  /**
+   *
+   * @param uiRouter used to navigate between views
+   * @param userViewService used to retrieve the requests and to set the selected request to modify in its internal state
+   */
+  constructor(private uiRouter: UIRouter, private userViewService: UserViewService) {
     this.requests = new Array<PACRequest>();
     this.dataSource =  new BehaviorSubject(this.requests);
   }
 
   ngOnInit() {
+    // Retrieve the userviewService requests and assign them to the variables
     this.userViewService.getRequests().then((requests) => {
       this.requests = requests;
-      console.log(this.requests);
       this.dataSource.next(this.requests);
     });
   }
 
+  /**
+   * Called when the add button is clicked, navigate to the request creation screen.
+   */
   public goToNewRequest() {
     this.uiRouter.stateService.go('new-request');
   }
 
+  /**
+   * Method called when a row is clicked
+   * When a row is clicked and the expanded element is different than the row then it sets the expanded element variable with the element
+   * When a row is clicked and the expanded element is the same than the row then it sets the expanded element to null
+   * When a row has the Request Status Needs Corrections it redirects the user to the correction screen, setting the selected
+   * element in the internal state-
+   * @param element request of the row clicked.
+   */
   public clickedRow(element: PACRequest) {
     this.expandedElement !== element ? this.expandedElement = element : this.expandedElement = null;
     if (element.PACRequestStatus === 'Needs Corrections') {

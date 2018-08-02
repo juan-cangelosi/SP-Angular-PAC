@@ -17,28 +17,40 @@ import { UIRouter } from '../../../../node_modules/@uirouter/core';
 })
 export class NewRequestComponent implements OnInit {
 
+  // Variable used to fill the managers selection autocomplete options, it contains the managers
   public managers: User[];
+  // Variable used to fill the Type of request select options.
   public requestTypes: string[];
 
+  // Model of the request to send.
   public request: PACRequest;
 
+  // Form control of the manager autocomplete
   requestToCtrl = new FormControl();
   filteredRequests: Observable<any[]>;
 
+  // Variable binded to the add attachment input to retrieve the uploaded files from it.
   @ViewChild('imgFileInput') imgFileInput;
 
-
+  /**
+  *
+  * @param userViewService
+  * @param _sanitizer
+  * @param uiRouter
+  */
   constructor(private userViewService: UserViewService, private _sanitizer: DomSanitizer, public uiRouter: UIRouter) {
+    // when the user writes a name we filter the manager lists according to it.
     this.filteredRequests = this.requestToCtrl.valueChanges
       .pipe(
         startWith(''),
         map(manager => manager ? this._filterManagers(manager) : this.managers.slice())
       );
+      // Retrieve the selected request from the service internal state
     const selectedRequest = this.userViewService.SelectedRequest;
-
+     // if it isnt null or undefined then we use the selected request
     if (selectedRequest) {
       this.request = selectedRequest;
-    } else {
+    } else { // else there wasnt a selected request and we make a new one.
       this.request = new PACRequest();
     }
   }

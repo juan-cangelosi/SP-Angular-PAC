@@ -2,7 +2,7 @@
   <mat-card-title>
     Create a Request
   </mat-card-title>
-  <form class="flex-col">
+  <form class="flex-col" (ngSubmit)="sendRequest()" #requestForm="ngForm">
     <mat-form-field class="flex-row">
       <mat-select name="pacRequestType" placeholder="Type of Request" [(ngModel)]="request.PACRequestType" required>
         <mat-option *ngFor="let typeRequest of requestTypes" [value]="typeRequest">{{typeRequest}}</mat-option>
@@ -54,9 +54,10 @@
     </div>
 
     <mat-list>
-      <mat-list-item *ngFor="let attachment of request.Attachments; let index = index">  {{attachment.fileName}}
+      <mat-list-item *ngFor="let attachment of request.Attachments; let index = index">
+          <a>{{attachment.fileName}}</a>
         <span class="example-fill-remaining-space"></span>
-        <button (click)="removeAttachment(index)" mat-icon-button>
+        <button type="button" (click)="removeAttachment(index)" mat-icon-button>
           <mat-icon>clear</mat-icon>
         </button>
       </mat-list-item>
@@ -67,7 +68,7 @@
     </div>
 
 
-    <button mat-raised-button color="primary" (click)="sendRequest()">Send Request</button>
+    <button mat-raised-button color="primary" type="submit" [disabled]="!requestForm.form.valid">Send Request</button>
   </form>
 
 </mat-card>
