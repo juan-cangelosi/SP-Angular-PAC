@@ -34,6 +34,7 @@ import { HumanResourcesComponent } from './human-resources/human-resources.compo
 import { HumanResourcesService } from './human-resources/human-resources.service';
 import { FinalReportViewComponent } from './human-resources/final-report-view/final-report-view.component';
 
+// Possible states of the router
 const userViewState = { name: 'user-view', component: UserViewComponent };
 const adminViewState = { name: 'admin-view', component: AdminViewComponent };
 const newRequestState = { name: 'new-request', component: NewRequestComponent };
@@ -58,6 +59,7 @@ const hrViewState = { name: 'final-request-view', component: FinalReportViewComp
   ],
   imports: [
     BrowserModule,
+    // Import the router and add all the possible states
     UIRouterModule.forRoot({
       states: [
         userViewState,
@@ -110,6 +112,9 @@ export class AppModule {
 
   }
 
+  /**
+   * Called when the module bootstraps, it will create the angular element that will be used in sharepoint
+   */
   ngDoBootstrap() {
     const strategyFactory = new ElementZoneStrategyFactory(AppComponent, this.injector);
     const helloElement = createCustomElement(AppComponent, { injector: this.injector, strategyFactory });

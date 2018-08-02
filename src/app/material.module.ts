@@ -23,6 +23,9 @@ import {
   MatProgressSpinnerModule,
 } from '@angular/material';
 
+/**
+ * Module used to wrapp all the material modules used in the app, so they will be all in one place
+ */
 @NgModule({
   imports: [
     CommonModule,
