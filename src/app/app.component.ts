@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { UIRouter } from '@uirouter/core';
 import { SpService } from './shared/sp-services/sp-service.service';
 
@@ -9,14 +9,15 @@ import { SpService } from './shared/sp-services/sp-service.service';
 })
 export class AppComponent implements OnInit {
 
+  @Input('configurations') configurations: any;
   public esAdmin: boolean;
 
   constructor(public uiRouter: UIRouter, public spService: SpService) {
-
   }
 
   ngOnInit() {
     this.esAdmin = false;
+    this.spService.configurations = this.configurations;
     if (this.esAdmin) {
       this.uiRouter.stateService.go('manager-view');
     } else {

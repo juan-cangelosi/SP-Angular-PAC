@@ -18,27 +18,37 @@ export class UserListService {
   }
 
   public async isUserManager(id: number): Promise<boolean> {
-    let isManager = true;
-    const userExistingInGroup = await sp.web.siteGroups.getByName('PACManager').users.getById(id).usingCaching().get();
-    if (!userExistingInGroup) {
-      isManager = false;
+    let isManager = false;
+    try {
+      const userExistingInGroup = await sp.web.siteGroups.getByName('PACManagers').users.getById(id).usingCaching().get();
+      if (!userExistingInGroup) {
+        isManager = false;
+      } else {
+        isManager = true;
+      }
+    } catch (exeption) {
     }
     return isManager;
   }
 
   public async isUserHR(id: number): Promise<boolean> {
-    let isManager = true;
-    const userExistingInGroup = await sp.web.siteGroups.getByName('HHRR').users.getById(id).usingCaching().get();
-    if (!userExistingInGroup) {
-      isManager = false;
+    let isHR = false;
+    try {
+      const userExistingInGroup = await sp.web.siteGroups.getByName('HHRR').users.getById(id).usingCaching().get();
+      if (!userExistingInGroup) {
+        isHR = false;
+      } else {
+        isHR = true;
+      }
+    } catch (exeption) {
     }
-    return isManager;
+    return isHR;
   }
 
   public async getManagers(): Promise<User[]> {
     const managers: User[] = new Array<User>();
     const web = sp.web;
-    const resJson = await web.siteGroups.getByName('PACManager').users.usingCaching().get();
+    const resJson = await web.siteGroups.getByName('PACManagers').users.usingCaching().get();
     for (const item of resJson) {
       const manager: User = new User();
       manager.PrepareDTO(item);

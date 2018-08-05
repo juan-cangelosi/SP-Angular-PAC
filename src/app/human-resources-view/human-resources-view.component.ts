@@ -4,6 +4,7 @@ import { PACRequestFinal } from '../models/PACRequestFinal';
 import { MatSort } from '@angular/material';
 import { UIRouter } from '@uirouter/core';
 import { HumanResourcesViewService } from './human-resources-view.service';
+import { LoaderService } from '../shared/components/loader/loader.service';
 
 @Component({
   selector: 'app-human-resources-view',
@@ -12,7 +13,7 @@ import { HumanResourcesViewService } from './human-resources-view.service';
 })
 export class HumanResourcesViewComponent implements OnInit {
 
-  public displayedColumns: string[] = ['id', /* 'fechaCreacion',*/ 'fechaInicio', 'horaInicio', 'fechaFin', 'horaFin', /* 'estado' */];
+  public displayedColumns: string[] = ['id', /* 'fechaCreacion',*/ 'type', 'fechaInicio', 'horaInicio', 'fechaFin', 'horaFin'];
   public dataSource: BehaviorSubject<PACRequestFinal[]>;
 
   public requests: PACRequestFinal[];
@@ -21,15 +22,17 @@ export class HumanResourcesViewComponent implements OnInit {
 
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(public humanResourcesService: HumanResourcesViewService, public uiRouter: UIRouter) {
+  constructor(public humanResourcesService: HumanResourcesViewService, public uiRouter: UIRouter, private loaderService: LoaderService) {
     this.dataSource =  new BehaviorSubject(this.requests);
   }
 
   ngOnInit() {
+    this.loaderService.show();
     this.humanResourcesService.getFinalRequests().then((requests) => {
       this.requests = requests;
       this.dataSource.next(this.requests);
       this.resultsLength = this.requests.length;
+      this.loaderService.hide();
     });
   }
 

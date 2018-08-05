@@ -10,12 +10,17 @@
     </tr>
   </tbody>
 </table>
-<form class="flex-col" #finalResponse="ngForm" >
-  <mat-form-field class="full-width">
-    <textarea name="PACReason" matInput placeholder="Reason" [(ngModel)]="request.PACHRResponse" required></textarea>
-  </mat-form-field>
-  <div class="btn-group">
-    <button mat-raised-button color="primary" [disabled]="!finalResponse.valid" (click)="approve()">Approve</button>
-    <button mat-raised-button color="warn" [disabled]="!finalResponse.valid" (click)="deny()">Deny</button>
-  </div>
-</form>
+<mat-card class="card-container center-data">
+  <mat-card-title>
+    Response
+  </mat-card-title>
+  <form class="flex-col" #finalResponse="ngForm">
+    <mat-form-field class="full-width">
+      <textarea name="PACReason" matInput placeholder="Reason" [(ngModel)]="request.PACHRResponse" required></textarea>
+    </mat-form-field>
+    <div class="btn-group">
+      <button mat-raised-button type="button" color="primary" [disabled]="!finalResponse.valid" (click)="approve()">Approve</button>
+      <button mat-raised-button type="button" color="warn" [disabled]="!finalResponse.valid" (click)="deny()">Deny</button>
+    </div>
+  </form>
+</mat-card>

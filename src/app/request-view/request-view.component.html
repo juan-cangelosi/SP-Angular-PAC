@@ -2,12 +2,23 @@
   <tbody>
     <tr class="mat-header-row ">
       <th class="mat-header-cell" role="columnheader"> Requester </th>
-      <th class="mat-header-cell   " role="columnheader"> Email </th>
     </tr>
     <tr class="mat-header-row ">
       <td class="mat-cell cdk-column-fechaInicio mat-column-fechaInicio ng-tns-c5-15 " role="gridcell"> {{author.Name}} </td>
+    </tr>
+    <!--
+<tr class="mat-header-row ">
+      <th class="mat-header-cell" role="columnheader"> Email </th>
+    </tr>
+    <tr class="mat-header-row ">
       <td class="mat-cell cdk-column-fechaInicio mat-column-fechaInicio ng-tns-c5-15 " role="gridcell"> {{author.Email}} </td>
     </tr>
+    -->
+    
+  </tbody>
+</table>
+<table class="mat-table">
+  <tbody>
     <tr class="mat-header-row ">
       <th class="mat-header-cell" role="columnheader"> Start Day </th>
       <th class="mat-header-cell" role="columnheader"> Start Hour </th>
@@ -36,11 +47,13 @@
         {{request.PACRequestType}}: {{request.PACReason}}
       </td>
     </tr>
-    <tr class="mat-header-row">
+    <tr class="mat-header-row" *ngIf="request.Attachments.length > 0">
       <th class="mat-header-cell   " role="columnheader"> Attachments </th>
     </tr>
-    <tr class="mat-header-row"  *ngFor="let attachment of request.Attachments">
-      <td class="mat-cell" role="gridcell" >   <a (click)="openAttachment(attachment)">{{attachment.fileName}}  </a></td>
+    <tr class="mat-header-row" *ngFor="let attachment of request.Attachments">
+      <td class="mat-cell" role="gridcell">
+        <a (click)="openAttachment(attachment)">{{attachment.fileName}} </a>
+      </td>
     </tr>
   </tbody>
 </table>

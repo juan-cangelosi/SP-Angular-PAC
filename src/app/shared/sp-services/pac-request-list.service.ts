@@ -82,7 +82,7 @@ export class PacRequestListService {
     for (const attachment of request.Attachments) {
       fileInfos.push({ name: attachment.fileName, content: attachment.file });
     }
-    response.item.attachmentFiles.addMultiple(fileInfos);
+    await response.item.attachmentFiles.addMultiple(fileInfos);
     const user = await this.userListService.getCurrentUser();
     this.pacFolderCreationService.moveItemsToFolder('PACRequest', user.Email, [+response.data.Id]);
     await response.item.shareWith(request.PACRequestTo.LoginName, SharingRole.View);
@@ -105,7 +105,7 @@ export class PacRequestListService {
     for (const attachment of request.Attachments) {
       fileInfos.push({ name: attachment.fileName, content: attachment.file });
     }
-    response.item.attachmentFiles.addMultiple(fileInfos);
+    await response.item.attachmentFiles.addMultiple(fileInfos);
     await response.item.shareWith(request.PACRequestTo.LoginName, SharingRole.View);
   }
 

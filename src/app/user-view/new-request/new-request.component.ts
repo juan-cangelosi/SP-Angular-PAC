@@ -9,6 +9,7 @@ import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { Attachment } from '../../models/Attachment';
 import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
 import { UIRouter } from '@uirouter/core';
+import { LoaderService } from '../../shared/components/loader/loader.service';
 
 @Component({
   selector: 'app-new-request',
@@ -38,7 +39,8 @@ export class NewRequestComponent implements OnInit {
   * @param _sanitizer used to sanitize links to show be able to open them outside angular
   * @param uiRouter used to transition to another views
   */
-  constructor(private userViewService: UserViewService, private _sanitizer: DomSanitizer, public uiRouter: UIRouter) {
+  constructor(private userViewService: UserViewService, private _sanitizer: DomSanitizer,
+    public uiRouter: UIRouter, private loaderService: LoaderService) {
     // when the user writes a name we filter the manager lists according to it.
     this.filteredRequests = this.requestToCtrl.valueChanges
       .pipe(
@@ -57,12 +59,16 @@ export class NewRequestComponent implements OnInit {
 
   ngOnInit() {
     // we get the type of requests from the backend
-    this.userViewService.getTypeOfRequests().then((requestsType) => {
+    this.loaderService.show();
+    const typeOfRequestPromise = this.userViewService.getTypeOfRequests().then((requestsType) => {
       this.requestTypes = requestsType;
     });
     // and we get the managers
-    this.userViewService.getManagers().then((managers) => {
+    const managersPromise = this.userViewService.getManagers().then((managers) => {
       this.managers = managers;
+    });
+    Promise.all([typeOfRequestPromise, managersPromise]).then(() => {
+      this.loaderService.hide();
     });
   }
 
@@ -82,11 +88,13 @@ export class NewRequestComponent implements OnInit {
    * After doing that successfully it navigates to the user view
    */
   public async sendRequest() {
+    this.loaderService.show();
     if (this.request.Id) {
       await this.userViewService.updateRequest(this.request);
     } else {
       await this.userViewService.addRequest(this.request);
     }
+    this.loaderService.hide();
     this.uiRouter.stateService.go('user-view');
   }
 

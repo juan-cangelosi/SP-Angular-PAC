@@ -118,9 +118,12 @@ export class AppModule {
    * Called when the module bootstraps, it will create the angular element that will be used in sharepoint
    */
   ngDoBootstrap() {
-    const strategyFactory = new ElementZoneStrategyFactory(AppComponent, this.injector);
-    const helloElement = createCustomElement(AppComponent, { injector: this.injector, strategyFactory });
-    customElements.define('pac-element', helloElement);
+    if (!customElements.get('pac-element')) {
+      const strategyFactory = new ElementZoneStrategyFactory(AppComponent, this.injector);
+      const helloElement = createCustomElement(AppComponent, { injector: this.injector, strategyFactory });
+      customElements.define('pac-element', helloElement);
+    }
+
   }
 
 

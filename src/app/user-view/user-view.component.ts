@@ -23,7 +23,7 @@ import { LoaderService } from '../shared/components/loader/loader.service';
 export class UserViewComponent implements OnInit {
 
   // Columns to display in the angular material table
-  public displayedColumns: string[] = ['id', /* 'fechaCreacion',*/ 'fechaInicio', 'horaInicio', 'fechaFin', 'horaFin', 'estado'];
+  public displayedColumns: string[] = [/* 'id', 'fechaCreacion',*/'type', 'fechaInicio', 'horaInicio', 'fechaFin', 'horaFin', 'estado'];
   // Datasourcec of the angular material table
   public dataSource: BehaviorSubject<PACRequest[]>;
 
@@ -53,7 +53,7 @@ export class UserViewComponent implements OnInit {
     this.userViewService.getRequests().then((requests) => {
       this.requests = requests;
       this.dataSource.next(this.requests);
-      // this.loaderService.hide();
+      this.loaderService.hide();
     });
   }
 

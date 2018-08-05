@@ -1,10 +1,5 @@
 import { Injectable } from '@angular/core';
 import { sp, Web } from '@pnp/sp';
-import {
-  Logger,
-  ConsoleListener,
-  LogLevel
-} from '@pnp/logging';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +7,8 @@ import {
 export class SpService {
 
   private web: Web;
+
+  public configurations: any;
 
   constructor() {
     sp.setup(
@@ -21,12 +18,5 @@ export class SpService {
         globalCacheDisable: false
       }
     );
-
-
-    // subscribe a listener
-    Logger.subscribe(new ConsoleListener());
-
-    // set the active log level
-    Logger.activeLogLevel = LogLevel.Info;
   }
 }

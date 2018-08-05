@@ -1,21 +1,17 @@
-<mat-card class="card-container">
-    <mat-card class="card-container">
-        <app-request-view [request]="requestToRespond">
-        </app-request-view>
-    </mat-card>
-    <mat-card class="card-container">
-        <mat-card-title>
-            Response
-        </mat-card-title>
-        <form class="flex-col" #responseForm="ngForm">
-            <mat-form-field class="full-width">
-                <textarea name="PACReason" matInput placeholder="Reason" [(ngModel)]="response.PACResponseReason" required></textarea>
-            </mat-form-field>
-            <div class="btn-group">
-                <button mat-raised-button type="button" [disabled]="!responseForm.valid" (click)="sendBack()">Send back</button>
-                <button mat-raised-button  type="button" color="primary" [disabled]="!responseForm.valid" (click)="approve()">Approve</button>
-                <button mat-raised-button type="button"  color="warn"  [disabled]="!responseForm.valid" (click)="deny()">Deny</button>
-            </div>
-        </form>
-    </mat-card>
+<app-request-view [request]="requestToRespond">
+</app-request-view>
+<mat-card class="card-container center-data">
+    <mat-card-title>
+        Response
+    </mat-card-title>
+    <form class="flex-col" #responseForm="ngForm">
+        <mat-form-field class="full-width">
+            <textarea name="PACReason" matInput placeholder="Reason" [(ngModel)]="response.PACResponseReason" required></textarea>
+        </mat-form-field>
+        <div class="btn-group">
+            <button mat-raised-button type="button" [disabled]="!responseForm.valid" (click)="sendBack()">Send back</button>
+            <button mat-raised-button type="button" color="primary" [disabled]="!responseForm.valid" (click)="approve()">Approve</button>
+            <button mat-raised-button type="button" color="warn" [disabled]="!responseForm.valid" (click)="deny()">Deny</button>
+        </div>
+    </form>
 </mat-card>

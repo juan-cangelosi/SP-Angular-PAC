@@ -12,7 +12,7 @@ import { UserListService } from '../../sp-services/user-list.service';
 })
 export class HeaderComponent implements OnInit {
 
-  public currentSite = 'Home';
+  public currentSite = 'PAC';
 
   // Boolean variables to decide to show or not the buttons of manager view and HR view.
   public isManager: boolean;

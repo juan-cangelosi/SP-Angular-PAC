@@ -21,6 +21,7 @@ import {
   MatChipsModule,
   MatDialogModule,
   MatProgressSpinnerModule,
+  MatMenuModule
 } from '@angular/material';
 
 /**
@@ -49,7 +50,8 @@ import {
     MatListModule,
     MatChipsModule,
     MatDialogModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatMenuModule,
   ],
   exports: [
     MatToolbarModule,
@@ -72,7 +74,8 @@ import {
     MatListModule,
     MatChipsModule,
     MatDialogModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatMenuModule
   ],
   declarations: []
 })

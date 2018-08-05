@@ -3,6 +3,7 @@ import { PACRequest } from '../../models/PACRequest';
 import { PACResponse } from '../../models/PACResponse';
 import { UIRouter } from '@uirouter/core';
 import { ManagerViewService } from '../manager-view.service';
+import { LoaderService } from '../../shared/components/loader/loader.service';
 /**
  * Component that represent the manager response to request view.
  * This component will show the request and will have a reponse field and buttons of the decition to make.
@@ -22,7 +23,7 @@ export class RequestResponseComponent implements OnInit {
    * @param uiRouter router to move between the components
    * @param managerViewService service that comunicates the manager view with the backend and other views
    */
-  constructor(private uiRouter: UIRouter, private managerViewService: ManagerViewService) {
+  constructor(private uiRouter: UIRouter, private managerViewService: ManagerViewService, private loaderService: LoaderService) {
     // We assign the selected request to the model and create a new response model
     this.requestToRespond = this.managerViewService.SelectedRequest;
     this.response = new PACResponse();
@@ -32,26 +33,28 @@ export class RequestResponseComponent implements OnInit {
   ngOnInit() {
   }
 
-  public approve() {
+  public async approve() {
     this.response.PACResponse = 'Approved';
-    this.sendRequest();
+    await this.sendRequest();
   }
 
-  public deny() {
+  public async deny() {
     this.response.PACResponse = 'Denied';
-    this.sendRequest();
+    await this.sendRequest();
   }
 
-  public sendBack() {
+  public async sendBack() {
     this.response.PACResponse = 'Send Back';
-    this.sendRequest();
+    await this.sendRequest();
   }
 
   /**
    * Sends the request to the backend and if successful, it changes the state to admin view.
    */
   private async sendRequest() {
+    this.loaderService.show();
     await this.managerViewService.sendResponseToRequest(this.response);
+    this.loaderService.hide();
     this.uiRouter.stateService.go('manager-view');
   }
 }

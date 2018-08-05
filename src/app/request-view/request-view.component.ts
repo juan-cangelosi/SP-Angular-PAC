@@ -3,6 +3,7 @@ import { PACRequest } from '../models/PACRequest';
 import { RequestViewService } from './request-view.service';
 import { User } from '../models/User';
 import { Attachment } from '../models/Attachment';
+import { LoaderService } from '../shared/components/loader/loader.service';
 
 @Component({
   selector: 'app-request-view',
@@ -15,13 +16,15 @@ export class RequestViewComponent implements OnInit {
 
   public author: User;
 
-  constructor(public requestViewService: RequestViewService) {
+  constructor(public requestViewService: RequestViewService, private loaderService: LoaderService) {
     this.author = new User();
   }
 
   ngOnInit() {
+    this.loaderService.show();
     this.requestViewService.getUser(this.request.AuthorId).then((user) => {
       this.author = user;
+      this.loaderService.hide();
     });
     console.log(this.request);
   }

@@ -1,50 +1,52 @@
-<table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+<div class="scroll-table">
+  <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
 
-  <!-- ID Column -->
-  <ng-container matColumnDef="id">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> Id. </th>
-    <td mat-cell *matCellDef="let element">{{element.id}}</td>
-  </ng-container>
+    <!-- ID Column -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Id. </th>
+      <td mat-cell *matCellDef="let element">{{element.Id}}</td>
+    </ng-container>
 
-  <!-- Creation Date Column 
-    
-  <ng-container matColumnDef="fechaCreacion">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> Creation Date </th>
-    <td mat-cell *matCellDef="let element">{{element.PACDateFrom | date }}</td>
-  </ng-container> 
--->
+    <!-- Type  -->
 
-  <!-- Start Date Column -->
-  <ng-container matColumnDef="fechaInicio">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> Start Date </th>
-    <td mat-cell *matCellDef="let element">{{element.PACDateFrom | date}}</td>
-  </ng-container>
+    <ng-container matColumnDef="type">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Type </th>
+      <td mat-cell *matCellDef="let element">{{element.PACRequestType }}</td>
+    </ng-container>
 
-  <!-- Start Date Column -->
-  <ng-container matColumnDef="horaInicio">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> Start Hour </th>
-    <td mat-cell *matCellDef="let element">{{element.PACHourFrom}}</td>
-  </ng-container>
 
-  <!-- Finish Date Column -->
-  <ng-container matColumnDef="fechaFin">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> Finish Date </th>
-    <td mat-cell *matCellDef="let element">{{element.PACDateTo | date}}</td>
-  </ng-container>
+    <!-- Start Date Column -->
+    <ng-container matColumnDef="fechaInicio">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header class="sm-hidden-value"> Start Date </th>
+      <td mat-cell *matCellDef="let element" class="sm-hidden-value">{{element.PACDateFrom | date}}</td>
+    </ng-container>
 
-  <!-- Finish Date Column -->
-  <ng-container matColumnDef="horaFin">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> Finish Hour </th>
-    <td mat-cell *matCellDef="let element">{{element.PACHourTo}}</td>
-  </ng-container>
+    <!-- Start Date Column -->
+    <ng-container matColumnDef="horaInicio">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header class="sm-hidden-value"> Start Hour </th>
+      <td mat-cell *matCellDef="let element" class="sm-hidden-value">{{element.PACHourFrom}}</td>
+    </ng-container>
 
-  <!-- Finish Date Column 
-  <ng-container matColumnDef="estado">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
-    <td mat-cell *matCellDef="let element">{{element.PACRequestStatus}}</td>
-  </ng-container>
-  -->
+    <!-- Finish Date Column -->
+    <ng-container matColumnDef="fechaFin">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header class="sm-hidden-value"> Finish Date </th>
+      <td mat-cell *matCellDef="let element" class="sm-hidden-value">{{element.PACDateTo | date}}</td>
+    </ng-container>
 
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="goToRequestResponse(row)"></tr>
-</table>
+    <!-- Finish Date Column -->
+    <ng-container matColumnDef="horaFin">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header class="sm-hidden-value"> Finish Hour </th>
+      <td mat-cell *matCellDef="let element" class="sm-hidden-value">{{element.PACHourTo}}</td>
+    </ng-container>
+
+    <!-- Finish Date Column 
+        <ng-container matColumnDef="estado">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+          <td mat-cell *matCellDef="let element">{{element.PACRequestStatus}}</td>
+        </ng-container>
+        -->
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="goToRequestResponse(row)"></tr>
+  </table>
+</div>

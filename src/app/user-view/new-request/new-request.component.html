@@ -1,4 +1,4 @@
-<mat-card class="card-container">
+<mat-card class="card-container center-data">
   <mat-card-title>
     Create a Request
   </mat-card-title>
@@ -17,7 +17,7 @@
       </mat-form-field>
 
       <mat-form-field class="col-6">
-        <input name="pacHourFrom" matInput placeholder="Start Hour"  pattern="^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$" [(ngModel)]="request.PACHourFrom" required>
+        <input type="text" name="pacHourFrom" matInput placeholder="Start Hour"  pattern="^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$" [(ngModel)]="request.PACHourFrom" required>
       </mat-form-field>
     </div>
 
@@ -29,7 +29,7 @@
       </mat-form-field>
 
       <mat-form-field class="col-6">
-        <input name="pacHourTo" matInput placeholder="Finish Hour " pattern="^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$" [(ngModel)]="request.PACHourTo" required>
+        <input  type="text" name="pacHourTo" matInput placeholder="Finish Hour " pattern="^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$" [(ngModel)]="request.PACHourTo" required>
       </mat-form-field>
     </div>
 
@@ -40,7 +40,7 @@
 
 
     <mat-form-field class="flex-row">
-      <input name="pacsendTo" matInput placeholder="Send Request To" aria-label="Manager" [matAutocomplete]="auto" [formControl]="requestToCtrl" required >
+      <input type="text" name="pacsendTo" matInput placeholder="Send Request To" aria-label="Manager" [matAutocomplete]="auto" [formControl]="requestToCtrl" required >
       <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn" (optionSelected)="optionSelected($event)">
         <mat-option *ngFor="let manager of managers" [value]="manager" (onSelect)="selected(manager)">
           {{manager.Name}}

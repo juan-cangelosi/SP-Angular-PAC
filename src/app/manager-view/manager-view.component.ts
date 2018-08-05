@@ -4,6 +4,7 @@ import { UIRouter } from '@uirouter/core';
 import { BehaviorSubject } from 'rxjs';
 import { PACRequest } from '../models/PACRequest';
 import { ManagerViewService } from './manager-view.service';
+import { LoaderService } from '../shared/components/loader/loader.service';
 /**
  * Component that represent the manager view of the requests made to him waiting for a response
  * The request will be shown in a list.
@@ -16,7 +17,7 @@ import { ManagerViewService } from './manager-view.service';
 export class ManagerViewComponent implements OnInit {
 
   // Array used to select which columns will be shown in the material list
-  public displayedColumns: string[] = ['id', /* 'fechaCreacion',*/ 'fechaInicio', 'horaInicio', 'fechaFin', 'horaFin', /* 'estado' */];
+  public displayedColumns: string[] = ['id', /* 'fechaCreacion',*/ 'type', 'fechaInicio', 'horaInicio', 'fechaFin', 'horaFin'];
 
   // Data source of the material list
   public dataSource: BehaviorSubject<PACRequest[]>;
@@ -33,17 +34,19 @@ export class ManagerViewComponent implements OnInit {
    * @param uiRouter router used to move between screens
    * @param managerViewService service used to comunicate between screens of the manager view and to retrieve data from the backend
    */
-  constructor(private uiRouter: UIRouter, private managerViewService: ManagerViewService) {
+  constructor(private uiRouter: UIRouter, private managerViewService: ManagerViewService, private loaderService: LoaderService) {
     // Initialize the datasource with an empty array
     this.dataSource =  new BehaviorSubject(this.requests);
   }
 
   ngOnInit() {
+    this.loaderService.show();
     // Get the request made to the manager and after they are received update the list
     this.managerViewService.getRequestsMadeToUser().then((requests) => {
       this.requests = requests;
       this.dataSource.next(this.requests);
       this.resultsLength = this.requests.length;
+      this.loaderService.hide();
     });
   }
 
