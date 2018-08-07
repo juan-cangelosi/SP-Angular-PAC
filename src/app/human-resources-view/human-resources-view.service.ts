@@ -11,6 +11,8 @@ export class HumanResourcesViewService {
 
   private selectedRequest: PACRequestFinal;
 
+  // request responded that shouldnt show in the array until the workflow changes its state
+  private requestAlreadyResponded: PACRequestFinal;
 
   constructor(private userListService: UserListService, private pacRequestFinalListService: PacRequestFinalListService) {
 
@@ -22,8 +24,25 @@ export class HumanResourcesViewService {
   }
 
   public async getFinalRequests(): Promise<PACRequestFinal[]> {
-    const request = await this.pacRequestFinalListService.getFinalPACRequests();
-    return request;
+    const requests = await this.pacRequestFinalListService.getFinalPACRequests();
+    // If there is a request already responded then we have to search it and remove it from the array
+    if (this.requestAlreadyResponded) {
+      let i = 0;
+      let encontre = false;
+      while (i <  requests.length && !encontre) {
+        if (requests[i].Id === this.requestAlreadyResponded.Id) {
+          encontre = true;
+        } else {
+          i++;
+        }
+      }
+      if (encontre) {
+        this.requestAlreadyResponded = null;
+        requests.splice(i, 1);
+      }
+    }
+
+    return requests;
   }
 
   public get SelectedRequest(): PACRequestFinal {
@@ -37,6 +56,7 @@ export class HumanResourcesViewService {
   }
 
   public async updateRequest(request: PACRequestFinal) {
+    this.requestAlreadyResponded = request;
     await this.pacRequestFinalListService.updateFinalPACRequest(request);
   }
 }

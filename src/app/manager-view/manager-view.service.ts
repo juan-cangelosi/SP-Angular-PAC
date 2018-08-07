@@ -15,6 +15,9 @@ export class ManagerViewService {
   // request that was selected in the manager view
   private selectedRequest: PACRequest;
 
+  // request responded that shouldnt show in the array until the workflow changes its state
+  private requestAlreadyResponded: PACRequest;
+
   /**
    * @param pacRequestListService used to retrieve the requests made to the manager from the sharepoint list
    * @param pacResponseListService used to save the responses to the request in the sharepoint list
@@ -31,6 +34,23 @@ export class ManagerViewService {
    */
   public async getRequestsMadeToUser(): Promise<PACRequest[]> {
     const requests: PACRequest[] = await this.pacRequestListService.getRequestsMadeToUser();
+    // If there is a request already responded then we have to search it and remove it from the array
+    if (this.requestAlreadyResponded) {
+      let i = 0;
+      let encontre = false;
+      while (i <  requests.length && !encontre) {
+        if (requests[i].Id === this.requestAlreadyResponded.Id) {
+          encontre = true;
+        } else {
+          i++;
+        }
+      }
+      if (encontre) {
+        this.requestAlreadyResponded = null;
+        requests.splice(i, 1);
+      }
+    }
+
     return requests;
   }
 
@@ -56,6 +76,7 @@ export class ManagerViewService {
    * @param response response to a request to save
    */
   public async sendResponseToRequest(response: PACResponse) {
+    this.requestAlreadyResponded = response.PACRequest;
     await this.pacResponseListService.addResponse(response);
   }
 }

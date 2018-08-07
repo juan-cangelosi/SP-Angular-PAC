@@ -9,7 +9,6 @@ import { SpService } from './shared/sp-services/sp-service.service';
 })
 export class AppComponent implements OnInit {
 
-  @Input('configurations') configurations: any;
   public esAdmin: boolean;
 
   constructor(public uiRouter: UIRouter, public spService: SpService) {
@@ -24,4 +23,11 @@ export class AppComponent implements OnInit {
       this.uiRouter.stateService.go('user-view');
     }
   }
+
+  @Input()
+  set configurations(configurations: any) {
+    this.spService.configurations = configurations;
+  }
+
+  get configurations(): any { return this.spService.configurations; }
 }

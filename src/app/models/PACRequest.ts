@@ -6,6 +6,7 @@ export class PACRequest {
   Id: number;
   Title: string;
   PACRequestTo: User;
+  PACRequestToId: number;
   PACNotify: any = '';
   PACDateFrom: Date;
   PACHourFrom: string;
@@ -34,7 +35,7 @@ export class PACRequest {
     if (jsonObj == null) { return; }
     if (jsonObj['Id'] != null) { this.Id = jsonObj['Id']; }
     if (jsonObj['Title'] != null) { this.Title = jsonObj['Title']; }
-    if (jsonObj['PACRequestTo'] != null) { this.PACRequestTo = jsonObj['PACRequestTo']; }
+    if (jsonObj['PACRequestToId'] != null) { this.PACRequestToId = jsonObj['PACRequestToId']; }
     if (jsonObj['PACNotify'] != null) { this.PACNotify = jsonObj['PACNotify']; }
     if (jsonObj['PACDateFrom'] != null) {
       this.PACDateFrom = new Date(jsonObj['PACDateFrom']);

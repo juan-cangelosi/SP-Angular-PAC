@@ -14,8 +14,8 @@ import { LoaderService } from '../shared/components/loader/loader.service';
   styleUrls: ['./user-view.component.css'],
   animations: [
     trigger('detailExpand', [
-      state('collapsed', style({height: '0px', minHeight: '0', display: 'none'})),
-      state('expanded', style({height: '*'})),
+      state('collapsed', style({ height: '0px', minHeight: '0', display: 'none' })),
+      state('expanded', style({ height: '*' })),
       transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
     ]),
   ]
@@ -23,9 +23,9 @@ import { LoaderService } from '../shared/components/loader/loader.service';
 export class UserViewComponent implements OnInit {
 
   // Columns to display in the angular material table
-  public displayedColumns: string[] = [/* 'id', 'fechaCreacion',*/'type', 'fechaInicio', 'horaInicio', 'fechaFin', 'horaFin', 'estado'];
-  // Datasourcec of the angular material table
-  public dataSource: BehaviorSubject<PACRequest[]>;
+  public displayedColumns: string[] = ['PACRequestType', 'PACDateFrom', 'PACHourFrom', 'PACDateTo', 'PACHourTo', 'PACRequestStatus'];
+  // Datasource of the angular material table
+  public dataSource: MatTableDataSource<PACRequest>;
 
   // variable used to know which row was clicked to show with more detail that element
   public expandedElement: PACRequest;
@@ -44,25 +44,28 @@ export class UserViewComponent implements OnInit {
    */
   constructor(private uiRouter: UIRouter, private userViewService: UserViewService, private loaderService: LoaderService) {
     this.requests = new Array<PACRequest>();
-    this.dataSource =  new BehaviorSubject(this.requests);
+    this.dataSource = new MatTableDataSource(this.requests);
   }
 
   ngOnInit() {
     this.loaderService.show();
+    console.log(this.sort);
+    this.dataSource.sort = this.sort;
     // Retrieve the userviewService requests and assign them to the variables
     this.userViewService.getRequests().then((requests) => {
       this.requests = requests;
-      this.dataSource.next(this.requests);
+      this.dataSource.data = requests;
+      // this.dataSource.next(this.requests);
       this.loaderService.hide();
     });
-  }
+}
 
   /**
    * Called when the add button is clicked, navigate to the request creation screen.
    */
   public goToNewRequest() {
-    this.uiRouter.stateService.go('new-request');
-  }
+  this.uiRouter.stateService.go('new-request');
+}
 
   /**
    * Method called when a row is clicked
@@ -73,11 +76,11 @@ export class UserViewComponent implements OnInit {
    * @param element request of the row clicked.
    */
   public clickedRow(element: PACRequest) {
-    this.expandedElement !== element ? this.expandedElement = element : this.expandedElement = null;
-    if (element.PACRequestStatus === 'Needs Corrections') {
-      this.userViewService.SelectedRequest = element;
-      this.uiRouter.stateService.go('new-request');
-    }
+  this.expandedElement !== element ? this.expandedElement = element : this.expandedElement = null;
+  if (element.PACRequestStatus === 'Needs Corrections') {
+    this.userViewService.SelectedRequest = element;
+    this.uiRouter.stateService.go('new-request');
   }
+}
 
 }

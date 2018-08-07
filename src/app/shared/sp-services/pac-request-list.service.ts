@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { sp, SharingRole, AttachmentFileInfo } from '@pnp/sp';
+import { sp, SharingRole, AttachmentFileInfo, PagedItemCollection } from '@pnp/sp';
 import { UserListService } from './user-list.service';
 import { PacFolderCreationService } from './pac-folder-creation.service';
 import { PACRequest } from '../../models/PACRequest';
@@ -31,6 +31,7 @@ export class PacRequestListService {
       }
       parsedItems.push(parsedItem);
     }
+
     return parsedItems;
   }
 

@@ -57,8 +57,16 @@
     </tr>
   </tbody>
 </table>
-<table class="mat-table" *ngIf="request.PACRequestStatus !== 'Pending'">
+<table class="mat-table">
   <tbody>
+    <tr class="mat-header-row">
+      <th class="mat-header-cell   " role="columnheader"> Reviewer </th>
+    </tr>
+    <tr class="mat-header-row ">
+      <td class="mat-cell" role="gridcell">
+        {{request.PACRequestTo?.Name}}
+      </td>
+    </tr>
     <tr class="mat-header-row">
       <th class="mat-header-cell   " role="columnheader"> Status </th>
     </tr>

@@ -10,5 +10,9 @@ export class PACRequestFinal extends PACRequest {
 
     PrepareDTO(jsonObj: any): void {
         super.PrepareDTO(jsonObj);
+        if (jsonObj['PACRequestReason'] != null) { this.PACReason = jsonObj['PACRequestReason']; }
+        if (jsonObj['PACResponseReason'] != null) { this.PACResponse = jsonObj['PACResponseReason']; }
+        if (jsonObj['PACRequesterId'] != null) { this.AuthorId = jsonObj['PACRequesterId']; }
+        if (jsonObj['PACResponse'] != null) { this.PACRequestStatus = jsonObj['PACResponse']; }
     }
 }

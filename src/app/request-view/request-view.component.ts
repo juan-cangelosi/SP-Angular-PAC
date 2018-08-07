@@ -22,11 +22,15 @@ export class RequestViewComponent implements OnInit {
 
   ngOnInit() {
     this.loaderService.show();
-    this.requestViewService.getUser(this.request.AuthorId).then((user) => {
+    const authorPromise = this.requestViewService.getUser(this.request.AuthorId).then((user) => {
       this.author = user;
+    });
+    const requestedToPromise = this.requestViewService.getUser(this.request.PACRequestToId).then((user) => {
+      this.request.PACRequestTo = user;
+    });
+    Promise.all([authorPromise, requestedToPromise]).then(() => {
       this.loaderService.hide();
     });
-    console.log(this.request);
   }
 
   public openAttachment(attachment: Attachment) {

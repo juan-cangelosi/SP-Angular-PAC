@@ -4,6 +4,7 @@ import { User } from '../models/User';
 import { Attachment } from '../models/Attachment';
 import { UserListService } from '../shared/sp-services/user-list.service';
 import { PacRequestListService } from '../shared/sp-services/pac-request-list.service';
+import { query } from '../../../node_modules/@angular/animations';
 
 @Injectable({
   providedIn: 'root'
@@ -23,8 +24,11 @@ export class UserViewService {
    * Returns the Requests made by the current user
    */
   public async getRequests(): Promise<PACRequest[]> {
+    // TODO ORDER BY DATE (NEW TO OLD)
     const requests = await this.pacRequestList.getMyPACRequests();
-    return requests;
+    // I want the array in reverse order so I see the last inserted first
+    const requestsOrdered = requests.reverse();
+    return requestsOrdered;
   }
 
   /**

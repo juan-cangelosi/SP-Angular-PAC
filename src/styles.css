@@ -1,75 +1,74 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import '~@angular/material/prebuilt-themes/indigo-pink.css';
-
 body {
-    margin: 0;
-    /* text-align: center; */
+  margin: 0;
+  /* text-align: center; */
 }
 
 a {
-    text-decoration: none;
-    cursor: pointer;
-    font-weight: bold;
+  text-decoration: none;
+  cursor: pointer;
+  font-weight: bold;
 }
-  
+
 a:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
 table {
-    width: 100%;
+  width: 100%;
 }
 
 .btn-group {
-    text-align: right;
+  text-align: right;
 }
 
 .flex-col {
-    /* min-width: 150px;
+  /* min-width: 150px;
    max-width: 500px;
    width: 100%;
    text-align: center;
    margin: 0 auto;
    */
-   display: flex;
-   flex-direction: column;
-   justify-content: center;
-  }
-  
-  .flex-row {
-    flex-flow: row wrap;
-  }
-  
-  .col-6 {
-    width: 50%;
-  }
-  
-  .card-container {
-    margin: 5px;
-  }
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 
-  .center-data {
-    text-align: center;
-  }
-  
-  .fill-space {
-    /* This fills the remaining space, by using flexbox. 
+.flex-row {
+  flex-flow: row wrap;
+}
+
+.col-6 {
+  width: 50%;
+}
+
+.card-container {
+  margin: 5px;
+}
+
+.center-data {
+  text-align: center;
+}
+
+.fill-space {
+  /* This fills the remaining space, by using flexbox. 
        Every toolbar row uses a flexbox row layout. */
-    flex: 1 1 auto;
-  }
-  
-  .full-width {
-    width: 100%;
-  }
+  flex: 1 1 auto;
+}
 
-  .sm-show-value {
-    display: none;
-  }
-  
+.full-width {
+  width: 100%;
+}
+
+.sm-show-value {
+  display: none;
+}
+
 @media(max-width: 600px) {
   .scroll-table {
-      /* overflow-x: auto !important; */
+    /* overflow-x: auto !important; */
   }
   .sm-hidden-value {
     display: none;
@@ -77,11 +76,9 @@ table {
   .sm-show-value {
     display: inherit;
   }
-
   .element-row {
     padding-right: 1px;
   }
-
   .btn-group {
     text-align: center;
   }
@@ -89,5 +86,32 @@ table {
     width: 100%;
   }
 }
-  
-  
+
+.spPac input[type=password], input[type=text], input[type=file], input:not([type]), select, textarea {
+  font: inherit;
+  background: 0 0;
+  color: currentColor;
+  border: none;
+  outline: 0;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  max-width: 100%;
+  vertical-align: bottom;
+  text-align: inherit;
+}
+
+.spPac input[type=button]:hover, input[type=reset]:hover, input[type=submit]:hover, button:hover {
+  border-color: inherit;
+  background-color: inherit;
+}
+
+.spPac input[type=button]:active, input[type=reset]:active, input[type=submit]:active, button:active {
+  border-color: inherit;
+  background-color: inherit;
+}
+
+.mat-sort-header-button button {
+  margin-left: 0;
+  min-width: 0;
+}

@@ -8,7 +8,8 @@ export class SpService {
 
   private web: Web;
 
-  public configurations: any;
+  private _configurations: any;
+
 
   constructor() {
     sp.setup(
@@ -19,4 +20,13 @@ export class SpService {
       }
     );
   }
+
+  public get configurations(): any {
+    return this._configurations;
+  }
+  public set configurations(value: any) {
+    console.log(value);
+    this._configurations = value;
+  }
+
 }
