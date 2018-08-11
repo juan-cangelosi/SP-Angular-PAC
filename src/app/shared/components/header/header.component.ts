@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UIRouter } from '@uirouter/core';
 import { UserListService } from '../../sp-services/user-list.service';
+import { SpService } from '../../sp-services/sp-service.service';
 
 /**
  * Component that represents the header of the app, it will contain the toolbar and the to navigate between the views.
@@ -18,16 +19,20 @@ export class HeaderComponent implements OnInit {
   public isManager: boolean;
   public isRRHH: boolean;
 
+  public selectedView: string;
+
   /**
    * @param router used to navigate between screens
    * @param userListService used to check if the current user has certain privileges
    */
-  constructor(private router: UIRouter, private userListService: UserListService) {
+  constructor(private router: UIRouter, private userListService: UserListService, private spService: SpService) {
     this.isManager = false;
     this.isRRHH = false;
+    this.selectedView = 'user-view';
   }
 
   ngOnInit() {
+    this.currentSite = this.spService.configurations.name;
     // Consult the userlistService if the user is a manager
     this.userListService.getCurrentUser().then((user) => {
       this.userListService.isUserManager(user.Id).then((manager) => {
@@ -44,6 +49,7 @@ export class HeaderComponent implements OnInit {
    * Method that navigate to the user view screen
    */
   public viewUserRequests() {
+    this.selectedView = 'user-view';
     this.router.stateService.go('user-view');
   }
 
@@ -51,6 +57,7 @@ export class HeaderComponent implements OnInit {
    * Method that navigate to the manager view screen
    */
   public viewAdminRequests() {
+    this.selectedView = 'manager-view';
     this.router.stateService.go('manager-view');
   }
 
@@ -58,6 +65,7 @@ export class HeaderComponent implements OnInit {
   * Method that navigate to the hr view screen
   */
   public viewHRRequests() {
+    this.selectedView = 'human-resources';
     this.router.stateService.go('human-resources');
   }
 

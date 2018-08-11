@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { sp, Web } from '@pnp/sp';
+import { IConfiguration } from '../../models/IConfiguration';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +9,7 @@ export class SpService {
 
   private web: Web;
 
-  private _configurations: any;
+  private _configurations: IConfiguration;
 
 
   constructor() {
@@ -21,10 +22,10 @@ export class SpService {
     );
   }
 
-  public get configurations(): any {
+  public get configurations(): IConfiguration {
     return this._configurations;
   }
-  public set configurations(value: any) {
+  public set configurations(value: IConfiguration) {
     console.log(value);
     this._configurations = value;
   }

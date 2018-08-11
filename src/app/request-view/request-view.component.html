@@ -71,8 +71,11 @@
       <th class="mat-header-cell   " role="columnheader"> Status </th>
     </tr>
     <tr class="mat-header-row ">
-      <td class="mat-cell" role="gridcell">
+      <td class="mat-cell" role="gridcell" *ngIf="request.PACRequestStatus !== 'Pending'">
         {{request.PACRequestStatus}}: {{request.PACResponse}}
+      </td>
+      <td class="mat-cell" role="gridcell" *ngIf="request.PACRequestStatus === 'Pending'">
+        {{request.PACRequestStatus}}
       </td>
     </tr>
   </tbody>

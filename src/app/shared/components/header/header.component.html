@@ -5,9 +5,9 @@
   <!-- This fills the remaining space of the current row -->
   <span class="fill-space"></span>
   <div class="button-row sm-hidden-value">
-    <button type="button"  mat-button (click)="viewUserRequests()">My Requests</button>
-    <button type="button" *ngIf="isManager" mat-button (click)="viewAdminRequests()">User Requests</button>
-    <button type="button" *ngIf="isRRHH" mat-button (click)="viewHRRequests()">Approved Requests</button>
+    <button type="button"  mat-button (click)="viewUserRequests()" [class.active]="selectedView === 'user-view'">My Requests</button>
+    <button type="button" *ngIf="isManager" mat-button (click)="viewAdminRequests()" [class.active]="selectedView === 'manager-view'">User Requests</button>
+    <button type="button" *ngIf="isRRHH" mat-button (click)="viewHRRequests()" [class.active]="selectedView === 'human-resources'">Approved Requests</button>
     <!-- 
       <button mat-icon-button (click)="viewCalendar()">
         <mat-icon  matBadge="22" matBadgeColor="warn">event</mat-icon>

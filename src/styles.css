@@ -66,6 +66,10 @@ table {
   display: none;
 }
 
+.mat-button.active {
+  background-color: #37479f;
+}
+
 @media(max-width: 600px) {
   .scroll-table {
     /* overflow-x: auto !important; */

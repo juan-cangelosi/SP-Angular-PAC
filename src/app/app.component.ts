@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { UIRouter } from '@uirouter/core';
 import { SpService } from './shared/sp-services/sp-service.service';
+import { IConfiguration } from './models/IConfiguration';
 
 @Component({
   selector: 'app-root',
@@ -25,9 +26,9 @@ export class AppComponent implements OnInit {
   }
 
   @Input()
-  set configurations(configurations: any) {
+  set configurations(configurations: IConfiguration) {
     this.spService.configurations = configurations;
   }
 
-  get configurations(): any { return this.spService.configurations; }
+  get configurations(): IConfiguration { return this.spService.configurations; }
 }

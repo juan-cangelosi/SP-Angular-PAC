@@ -4,7 +4,7 @@ import { User } from '../models/User';
 import { Attachment } from '../models/Attachment';
 import { UserListService } from '../shared/sp-services/user-list.service';
 import { PacRequestListService } from '../shared/sp-services/pac-request-list.service';
-import { query } from '../../../node_modules/@angular/animations';
+import { query } from '@angular/animations';
 
 @Injectable({
   providedIn: 'root'

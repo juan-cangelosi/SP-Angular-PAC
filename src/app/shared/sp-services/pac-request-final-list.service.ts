@@ -3,13 +3,14 @@ import { sp } from '@pnp/sp';
 import { UserListService } from './user-list.service';
 import { PACRequestFinal } from '../../models/PACRequestFinal';
 import { Attachment } from '../../models/Attachment';
+import { SpService } from './sp-service.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PacRequestFinalListService {
 
-  constructor(public userListService: UserListService) { }
+  constructor(private userListService: UserListService, private spService: SpService) { }
 
   public async getFinalPACRequests(): Promise<PACRequestFinal[]> {
     const user = await this.userListService.getCurrentUser();
