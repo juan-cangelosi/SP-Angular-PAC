@@ -16,13 +16,11 @@ export class PacRequestFinalListService {
     const user = await this.userListService.getCurrentUser();
     const items = await sp.web.lists.getByTitle('PACRequestFinal').items.filter(`PACRequestStatus eq 'Approved by Manager'`).get();
     const parsedItems: PACRequestFinal[] = new Array<PACRequestFinal>();
-    console.log(items);
     for (const item of items) {
       const parsedItem = new PACRequestFinal();
       parsedItem.PrepareDTO(item);
       const attachments = await sp.web.lists.getByTitle('PACRequestFinal').items.getById(item.Id).attachmentFiles.get();
       for (const attachmentItem of attachments) {
-        console.log(attachmentItem);
         const attachment = new Attachment();
         attachment.fileName = attachmentItem.FileName;
         attachment.fileOpenUrl = attachmentItem.ServerRelativeUrl;

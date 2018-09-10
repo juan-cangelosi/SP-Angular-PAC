@@ -50,7 +50,7 @@ export class PacFolderCreationService {
       try {
         await web.getFileByServerRelativeUrl(`${listData.RootFolder.ServerRelativeUrl}/${items[index]}_.000`)
           .moveTo(`${listData.RootFolder.ServerRelativeUrl}/${subfolder}/${items[index]}_.000`);
-      } catch (err) { console.log(`Item with id ${items[index]} alredy moved`); }
+      } catch (err) {  }
     }
 
   }

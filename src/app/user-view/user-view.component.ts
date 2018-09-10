@@ -49,7 +49,6 @@ export class UserViewComponent implements OnInit {
 
   ngOnInit() {
     this.loaderService.show();
-    console.log(this.sort);
     this.dataSource.sort = this.sort;
     // Retrieve the userviewService requests and assign them to the variables
     this.userViewService.getRequests().then((requests) => {

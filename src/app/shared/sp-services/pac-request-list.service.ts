@@ -16,13 +16,11 @@ export class PacRequestListService {
     const user = await this.userListService.getCurrentUser();
     const items = await sp.web.lists.getByTitle('PACRequest').items.filter(`AuthorId eq '${user.Id}' and Title eq null`).get();
     const parsedItems: PACRequest[] = new Array<PACRequest>();
-    console.log(items);
     for (const item of items) {
       const parsedItem = new PACRequest();
       parsedItem.PrepareDTO(item);
       const attachments = await sp.web.lists.getByTitle('PACRequest').items.getById(item.Id).attachmentFiles.get();
       for (const attachmentItem of attachments) {
-        console.log(attachmentItem);
         const attachment = new Attachment();
         attachment.fileName = attachmentItem.FileName;
         attachment.fileOpenUrl = attachmentItem.ServerRelativeUrl;
@@ -42,13 +40,11 @@ export class PacRequestListService {
     const items = await sp.web.lists.getByTitle('PACRequest').items
       .filter(`PACRequestToId eq '${user.Id}' and PACRequestStatus eq 'Pending'`).get();
     const parsedItems: PACRequest[] = new Array<PACRequest>();
-    console.log(items);
     for (const item of items) {
       const parsedItem = new PACRequest();
       parsedItem.PrepareDTO(item);
       const attachments = await sp.web.lists.getByTitle('PACRequest').items.getById(item.Id).attachmentFiles.get();
       for (const attachmentItem of attachments) {
-        console.log(attachmentItem);
         const attachment = new Attachment();
         attachment.fileName = attachmentItem.FileName;
         attachment.fileOpenUrl = attachmentItem.ServerRelativeUrl;
@@ -77,7 +73,6 @@ export class PacRequestListService {
       PACReason: request.PACReason,
       PACRequestType: request.PACRequestType
     };
-    console.log(insertObject);
     const response = await sp.web.lists.getByTitle('PACRequest').items.add(insertObject);
     const fileInfos: AttachmentFileInfo[] = [];
     for (const attachment of request.Attachments) {
@@ -98,7 +93,6 @@ export class PacRequestListService {
       PACReason: request.PACReason,
       PACRequestType: request.PACRequestType
     };
-    console.log(insertObject);
     const response = await sp.web.lists.getByTitle('PACRequest').items.getById(request.Id).update(
       insertObject, '*'
     );
@@ -120,7 +114,6 @@ export class PacRequestListService {
       .getByInternalNameOrTitle('PACRequestType');
     const resJson = await field.select('Choices').get();
     const choices = new Array<string>();
-    console.log(resJson);
     for (const item of resJson.Choices) {
       choices.push(item);
     }

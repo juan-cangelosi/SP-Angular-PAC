@@ -15,7 +15,6 @@ export class PacResponseListService {
     const items = await sp.web.lists.getByTitle('PACResponse').items.get();
     const parsedItems: PACResponse[] = new Array<PACResponse>();
     for (const item of items) {
-      console.log(item);
       // set item;
     }
     return parsedItems;
@@ -29,7 +28,6 @@ export class PacResponseListService {
       const parsedItem = new PACResponse();
       parsedItem.PrepareDTO(item);
     }
-    console.log(parsedItems);
     return parsedItems;
   }
 

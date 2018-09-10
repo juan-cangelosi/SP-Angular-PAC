@@ -32,7 +32,12 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.currentSite = this.spService.configurations.name;
+    if (this.spService.configurations) {
+      this.currentSite = this.spService.configurations.name;
+    } else {
+      this.currentSite = 'PAC';
+    }
+
     // Consult the userlistService if the user is a manager
     this.userListService.getCurrentUser().then((user) => {
       this.userListService.isUserManager(user.Id).then((manager) => {

@@ -26,7 +26,6 @@ export class SpService {
     return this._configurations;
   }
   public set configurations(value: IConfiguration) {
-    console.log(value);
     this._configurations = value;
   }
 

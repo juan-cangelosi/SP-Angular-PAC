@@ -27,7 +27,6 @@ export class FinalReportViewComponent implements OnInit {
       this.author = user;
       this.loaderService.hide();
     });
-    console.log(this.request);
   }
 
   public async approve() {
